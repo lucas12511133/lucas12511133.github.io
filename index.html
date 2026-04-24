@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academic Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       TOKENS & RESET
+    ============================================================ */
+    :root {
+      --bg: #ffffff;
+      --surface: #f8f9fb;
+      --border: #e4e7ec;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --accent-dark: #1d4ed8;
+      --green: #059669;
+      --gold: #d97706;
+      --radius: 8px;
+      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.1);
+      --max-w: 860px;
+      --nav-h: 56px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       LAYOUT UTILS
+    ============================================================ */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    section { padding: 72px 0; }
+    section:nth-child(even) { background: var(--surface); }
+    .section-title {
+      font-size: 1rem; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 32px; display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav-h); background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-weight: 700; font-size: .95rem; color: var(--text); letter-spacing: -.02em; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-size: .875rem; font-weight: 500; color: var(--muted);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); text-decoration: none; }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      padding: 88px 0 72px;
+      background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 60%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+      display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15;
+      letter-spacing: -.03em; color: var(--text); margin-bottom: 12px;
+    }
+    .hero-subtitle { font-size: 1.05rem; color: var(--muted); margin-bottom: 20px; line-height: 1.7; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+    .hero-meta-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: .875rem; color: var(--muted);
+    }
+    .hero-meta-item svg { flex-shrink: 0; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 18px; border-radius: var(--radius);
+      font-size: .875rem; font-weight: 600; transition: all .2s; cursor: pointer;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-dark); text-decoration: none; }
+    .btn-ghost { border: 1.5px solid var(--border); color: var(--text); background: #fff; }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+    .avatar-wrap {
+      width: 160px; height: 160px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; flex-shrink: 0; box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+    .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ============================================================
+       ABOUT
+    ============================================================ */
+    .about-body { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 24px; }
+    .interest-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      background: var(--accent-light); color: var(--accent);
+      padding: 4px 12px; border-radius: 20px;
+      font-size: .8125rem; font-weight: 500;
+    }
+
+    /* ============================================================
+       EDUCATION
+    ============================================================ */
+    .edu-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 28px;
+      box-shadow: var(--shadow); margin-bottom: 16px;
+    }
+    .edu-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+    .edu-school { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .edu-degree { font-size: .9rem; color: var(--muted); margin-top: 2px; }
+    .edu-period { font-size: .8125rem; font-weight: 500; color: var(--muted); }
+    .edu-gpa {
+      margin-top: 12px; display: inline-flex; align-items: center; gap: 6px;
+      background: #f0fdf4; color: var(--green);
+      font-size: .875rem; font-weight: 600; padding: 4px 12px; border-radius: 20px;
+    }
+    .courses-grid {
+      margin-top: 16px; display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px;
+    }
+    .course-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 6px 10px; background: var(--surface); border-radius: 6px;
+      font-size: .8125rem;
+    }
+    .course-name { color: var(--text); }
+    .course-grade {
+      font-weight: 700; color: var(--accent); flex-shrink: 0; margin-left: 8px;
+    }
+
+    /* ============================================================
+       RESEARCH
+    ============================================================ */
+    .research-card {
+      border-left: 3px solid var(--accent);
+      padding: 20px 24px; background: #fff;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      box-shadow: var(--shadow); margin-bottom: 20px;
+    }
+    .research-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .research-meta {
+      font-size: .8125rem; color: var(--muted); margin-bottom: 10px;
+      display: flex; flex-wrap: wrap; gap: 12px;
+    }
+    .research-desc { font-size: .9rem; color: var(--muted); line-height: 1.7; }
+    .research-tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag-sm {
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border);
+      padding: 2px 9px; border-radius: 12px; font-size: .75rem; font-weight: 500;
+    }
+    .badge-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: .78rem; font-weight: 600; color: var(--accent);
+      background: var(--accent-light); padding: 2px 9px; border-radius: 12px;
+    }
+
+    /* ============================================================
+       AWARDS
+    ============================================================ */
+    .awards-list { display: grid; gap: 12px; }
+    .award-row {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 16px 20px; background: #fff;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .award-icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .award-icon.gold { background: #fffbeb; }
+    .award-icon.silver { background: #f1f5f9; }
+    .award-icon.blue { background: var(--accent-light); }
+    .award-body { flex: 1; }
+    .award-title { font-size: .9375rem; font-weight: 600; color: var(--text); }
+    .award-issuer { font-size: .8125rem; color: var(--muted); margin-top: 2px; }
+    .award-year { font-size: .8125rem; font-weight: 600; color: var(--muted); flex-shrink: 0; }
+
+    /* ============================================================
+       SKILLS
+    ============================================================ */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    .skill-group { }
+    .skill-group-title { font-size: .8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 10px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      padding: 4px 12px; border-radius: 20px;
+      font-size: .8125rem; font-weight: 500;
+      background: var(--surface); border: 1px solid var(--border); color: var(--text);
+    }
+
+    /* ============================================================
+       CONTACT
+    ============================================================ */
+    #contact { text-align: center; }
+    #contact .container { max-width: 600px; }
+    .contact-intro { font-size: 1.05rem; color: var(--muted); margin-bottom: 32px; }
+    .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border: 1.5px solid var(--border);
+      border-radius: var(--radius); font-size: .875rem; font-weight: 600;
+      color: var(--text); transition: all .2s; background: #fff;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0; text-align: center;
+      font-size: .8125rem; color: var(--muted);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 640px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .avatar-wrap { width: 120px; height: 120px; font-size: 2.5rem; }
+      .nav-links { gap: 16px; }
+      .nav-links a:nth-child(n+5) { display: none; }
+      section { padding: 52px 0; }
+    }
+
+    /* ============================================================
+       SCROLL FADE-IN
+    ============================================================ */
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     DATA LAYER — Edit PROFILE to update the entire page
+============================================================ -->
+<script>
+const PROFILE = {
+  // ── Basic Info ──────────────────────────────────────────────
+  name:        "Lucas",               // Your preferred name
+  fullName:    "Lucas Lu",
+  photo:       "",                    // URL or local path to photo, leave empty for initials
+  initials:    "L",                   // Shown when no photo
+  tagline:     "Industrial Engineering",
+  university:  "Southern University of Science and Technology (SUSTech)",
+  location:    "Shenzhen, China",
+  year:        "Class of 2025",
+  email:       "12511133@mail.sustech.edu.cn",
+  github:      "https://github.com/yourusername",
+  linkedin:    "",                    // leave empty to hide
+  cv:          "",                    // link to PDF CV, leave empty to hide
+
+  // ── About ────────────────────────────────────────────────────
+  about: `I am a first-year undergraduate at SUSTech majoring in Applied Mathematics 
+(Industrial Engineering track). My academic interests lie at the intersection of 
+mathematical modeling, optimization, and data-driven decision making. I am actively 
+seeking research opportunities to build toward a PhD in applied mathematics or 
+operations research.`,
+
+  interests: [
+    "Optimization & Operations Research",
+    "Probability & Stochastic Processes",
+    "Machine Learning / Data Science",
+    "Mathematical Modeling",
+    "Human Activity Recognition",
+  ],
+
+  // ── Education ────────────────────────────────────────────────
+  education: [
+    {
+      school:   "Southern University of Science and Technology (SUSTech)",
+      degree:   "B.Eng. in Applied Mathematics (Industrial Engineering)",
+      period:   "Sep 2025 – Jun 2029 (Expected)",
+      gpa:      "—",           // update when available
+      gpaScale: "4.0",
+      courses: [
+        { name: "Mathematical Analysis",          grade: "—" },
+        { name: "Ordinary Differential Equations", grade: "—" },
+        { name: "Probability Theory",             grade: "—" },
+        { name: "University Physics",             grade: "—" },
+        { name: "Linear Algebra",                 grade: "—" },
+        { name: "Fundamentals of Programming",    grade: "—" },
+      ],
+    },
+  ],
+
+  // ── Research & Projects ──────────────────────────────────────
+  research: [
+    {
+      title:  "Human Activity Recognition (HAR) using UCI HAR Dataset",
+      role:   "Undergraduate Researcher",
+      period: "2026",
+      desc:   "Investigated machine learning approaches for recognizing human activities " +
+              "(walking, running, sitting, etc.) from wearable sensor data. " +
+              "Explored feature engineering and classification algorithms on the UCI HAR benchmark.",
+      tags:   ["Machine Learning", "Signal Processing", "Python", "scikit-learn"],
+      link:   "",
+    },
+    // Add more projects here following the same structure
+  ],
+
+  // ── Awards & Honors ──────────────────────────────────────────
+  awards: [
+    {
+      icon:   "🏅",
+      style:  "gold",
+      title:  "Your Award Title Here",
+      issuer: "Issuing Organization / SUSTech",
+      year:   "2026",
+    },
+    // Add more awards here
+  ],
+
+  // ── Skills ───────────────────────────────────────────────────
+  skills: [
+    {
+      group: "Mathematics",
+      tags:  ["Calculus", "ODE", "Probability", "Linear Algebra", "Statistics"],
+    },
+    {
+      group: "Programming",
+      tags:  ["Python", "MATLAB", "R", "LaTeX"],
+    },
+    {
+      group: "Tools & Frameworks",
+      tags:  ["scikit-learn", "NumPy", "Pandas", "Matplotlib", "Jupyter"],
+    },
+    {
+      group: "Languages",
+      tags:  ["Chinese (Native)", "English (Proficient)"],
+    },
+  ],
+};
+</script>
+
+<!-- ============================================================
+     RENDER ENGINE
+============================================================ -->
+<script>
+// Runs after DOM loads
+document.addEventListener('DOMContentLoaded', () => {
+  renderPage();
+  initScrollFade();
+  initActiveNav();
+});
+
+function renderPage() {
+  const p = PROFILE;
+
+  // ── NAV ──────────────────────────────────────────────────────
+  document.querySelector('.nav-logo').textContent = p.name;
+
+  // ── HERO ─────────────────────────────────────────────────────
+  document.querySelector('.hero-name').textContent = p.fullName;
+  document.querySelector('.hero-subtitle').textContent = p.tagline;
+  document.getElementById('hero-uni').textContent    = p.university;
+  document.getElementById('hero-loc').textContent    = p.location;
+  document.getElementById('hero-year').textContent   = p.year;
+
+  // Avatar
+  const av = document.querySelector('.avatar-wrap');
+  if (p.photo) {
+    av.innerHTML = `<img src="${p.photo}" alt="${p.name}" />`;
+  } else {
+    av.textContent = p.initials;
+  }
+
+  // CTA buttons
+  const ctaDiv = document.querySelector('.hero-cta');
+  ctaDiv.innerHTML = '';
+  ctaDiv.innerHTML += `<a class="btn btn-primary" href="mailto:${p.email}">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/>
+    </svg>
+    Contact Me</a>`;
+  if (p.cv)       ctaDiv.innerHTML += `<a class="btn btn-ghost" href="${p.cv}" target="_blank">View CV</a>`;
+  if (p.github)   ctaDiv.innerHTML += `<a class="btn btn-ghost" href="${p.github}" target="_blank">GitHub</a>`;
+
+  // ── ABOUT ────────────────────────────────────────────────────
+  document.querySelector('.about-body').innerHTML = p.about.replace(/\n/g,'<br/>');
+  document.querySelector('.interest-tags').innerHTML =
+    p.interests.map(t => `<span class="tag">${t}</span>`).join('');
+
+  // ── EDUCATION ────────────────────────────────────────────────
+  const eduContainer = document.querySelector('.edu-cards');
+  eduContainer.innerHTML = p.education.map(e => `
+    <div class="edu-card">
+      <div class="edu-header">
+        <div>
+          <div class="edu-school">${e.school}</div>
+          <div class="edu-degree">${e.degree}</div>
+        </div>
+        <div class="edu-period">${e.period}</div>
+      </div>
+      <div class="edu-gpa">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17 5.8 21.3l2.4-7.4L2 9.4h7.6z"/>
+        </svg>
+        GPA: ${e.gpa} / ${e.gpaScale}
+      </div>
+      <div class="courses-grid">
+        ${e.courses.map(c => `
+          <div class="course-row">
+            <span class="course-name">${c.name}</span>
+            <span class="course-grade">${c.grade}</span>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  // ── RESEARCH ─────────────────────────────────────────────────
+  const resContainer = document.querySelector('.research-cards');
+  resContainer.innerHTML = p.research.map(r => `
+    <div class="research-card">
+      <div class="research-title">${r.title}</div>
+      <div class="research-meta">
+        <span>🔬 ${r.role}</span>
+        <span>📅 ${r.period}</span>
+      </div>
+      <div class="research-desc">${r.desc}</div>
+      <div class="research-tags">
+        ${r.tags.map(t => `<span class="tag-sm">${t}</span>`).join('')}
+        ${r.link ? `<a class="badge-link" href="${r.link}" target="_blank">🔗 Link</a>` : ''}
+      </div>
+    </div>`).join('');
+
+  // ── AWARDS ───────────────────────────────────────────────────
+  const awardsContainer = document.querySelector('.awards-list');
+  awardsContainer.innerHTML = p.awards.map(a => `
+    <div class="award-row">
+      <div class="award-icon ${a.style}">${a.icon}</div>
+      <div class="award-body">
+        <div class="award-title">${a.title}</div>
+        <div class="award-issuer">${a.issuer}</div>
+      </div>
+      <div class="award-year">${a.year}</div>
+    </div>`).join('');
+
+  // ── SKILLS ───────────────────────────────────────────────────
+  const skillsContainer = document.querySelector('.skills-grid');
+  skillsContainer.innerHTML = p.skills.map(s => `
+    <div class="skill-group">
+      <div class="skill-group-title">${s.group}</div>
+      <div class="skill-tags">
+        ${s.tags.map(t => `<span class="skill-tag">${t}</span>`).join('')}
+      </div>
+    </div>`).join('');
+
+  // ── CONTACT ──────────────────────────────────────────────────
+  const contactLinks = document.querySelector('.contact-links');
+  let links = `<a class="contact-link" href="mailto:${p.email}">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/>
+    </svg>${p.email}</a>`;
+  if (p.github)   links += `<a class="contact-link" href="${p.github}" target="_blank">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.48 2 2 6.58 2 12.19c0 4.5 2.87 8.32 6.84 9.67.5.09.68-.22.68-.49v-1.7C6.86 20.2 6.28 18.3 6.28 18.3c-.45-1.17-1.1-1.48-1.1-1.48-.9-.63.07-.62.07-.62 1 .07 1.52 1.05 1.52 1.05.88 1.54 2.31 1.1 2.87.84.09-.65.34-1.1.62-1.35-2.19-.25-4.49-1.12-4.49-4.97 0-1.1.38-1.99 1.01-2.7-.1-.26-.44-1.28.1-2.66 0 0 .83-.27 2.71 1.03A9.3 9.3 0 0 1 12 8.84c.84.004 1.68.11 2.47.33 1.88-1.3 2.71-1.03 2.71-1.03.54 1.38.2 2.4.1 2.66.63.71 1.01 1.6 1.01 2.7 0 3.86-2.31 4.71-4.51 4.96.36.31.67.93.67 1.87v2.77c0 .27.18.59.69.49A10.2 10.2 0 0 0 22 12.19C22 6.58 17.52 2 12 2z"/>
+    </svg>GitHub</a>`;
+  if (p.linkedin) links += `<a class="contact-link" href="${p.linkedin}" target="_blank">LinkedIn</a>`;
+  if (p.cv)       links += `<a class="contact-link" href="${p.cv}" target="_blank">📄 Download CV</a>`;
+  contactLinks.innerHTML = links;
+
+  // ── FOOTER ───────────────────────────────────────────────────
+  document.getElementById('footer-name').textContent = p.fullName;
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+}
+
+// ── Scroll fade-in ────────────────────────────────────────────
+function initScrollFade() {
+  const els = document.querySelectorAll('.fade-in');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  els.forEach(el => io.observe(el));
+}
+
+// ── Active nav highlight ──────────────────────────────────────
+function initActiveNav() {
+  const sections = document.querySelectorAll('section[id], div[id="hero"]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
+    });
+  }, { passive: true });
+}
+</script>
+
+<!-- ============================================================
+     HTML SKELETON
+============================================================ -->
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">—</span>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#research">Research</a>
+      <a href="#awards">Awards</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">PhD Applicant · 2028</div>
+      <h1 class="hero-name">—</h1>
+      <p class="hero-subtitle">—</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span id="hero-uni">—</span>
+        </span>
+        <span class="hero-meta-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span id="hero-loc">—</span>
+        </span>
+        <span class="hero-meta-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span id="hero-year">—</span>
+        </span>
+      </div>
+      <div class="hero-cta"></div>
+    </div>
+    <div class="avatar-wrap">—</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About Me</h2>
+    <p class="about-body fade-in"></p>
+    <div class="interest-tags fade-in"></div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <h2 class="section-title">Education</h2>
+    <div class="edu-cards fade-in"></div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="container">
+    <h2 class="section-title">Research &amp; Projects</h2>
+    <div class="research-cards fade-in"></div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="container">
+    <h2 class="section-title">Awards &amp; Honors</h2>
+    <div class="awards-list fade-in"></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid fade-in"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title" style="justify-content:center;">Get In Touch</h2>
+    <p class="contact-intro">Interested in research collaboration or PhD opportunities? Feel free to reach out.</p>
+    <div class="contact-links"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© <span id="footer-year"></span> <span id="footer-name"></span> · Built with HTML &amp; ❤️</p>
+</footer>
+
+</body>
+</html>
