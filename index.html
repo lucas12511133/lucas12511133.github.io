@@ -310,15 +310,17 @@ operations research.`,
       school:   "Southern University of Science and Technology (SUSTech)",
       degree:   "B.Eng. in Applied Mathematics (Industrial Engineering)",
       period:   "Sep 2025 – Jun 2029 (Expected)",
-      gpa:      "—",           // update when available
+      gpa:      "3.87",
       gpaScale: "4.0",
+      rank:     "119/1363 (Top 8.7%)",
       courses: [
-        { name: "Mathematical Analysis",          grade: "—" },
-        { name: "Ordinary Differential Equations", grade: "—" },
-        { name: "Probability Theory",             grade: "—" },
-        { name: "University Physics",             grade: "—" },
-        { name: "Linear Algebra",                 grade: "—" },
-        { name: "Fundamentals of Programming",    grade: "—" },
+        { name: "Mathematical Analysis I",        grade: "93 (A)" },
+        { name: "Linear Algebra",                 grade: "89 (B+)" },
+        { name: "College Physics I",              grade: "87 (B+)" },
+        { name: "Experiments of Fundamental Physics", grade: "95 (A)" },
+        { name: "Introduction to C Programming",  grade: "96 (A)" },
+        { name: "College Earth Science",          grade: "93 (A)" },
+        { name: "SUSTech English II",             grade: "96 (A)" },
       ],
     },
   ],
@@ -491,6 +493,7 @@ function renderPage() {
           <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17 5.8 21.3l2.4-7.4L2 9.4h7.6z"/>
         </svg>
         GPA: ${e.gpa} / ${e.gpaScale}
+        ${e.rank ? `<span style="margin-left:10px;color:#6b7280;">Rank: ${e.rank}</span>` : ''}
       </div>
       <div class="courses-grid">
         ${e.courses.map(c => `
