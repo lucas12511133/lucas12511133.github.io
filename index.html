@@ -158,6 +158,13 @@
       padding: 6px 10px; background: var(--surface); border-radius: 6px;
       font-size: .8125rem;
     }
+    .semester-group { margin-bottom: 14px; }
+    .semester-group:last-child { margin-bottom: 0; }
+    .semester-label {
+      font-size: .7rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--accent); margin-bottom: 6px;
+      padding-left: 2px;
+    }
     .course-name { color: var(--text); }
     .course-grade {
       font-weight: 700; color: var(--accent); flex-shrink: 0; margin-left: 8px;
@@ -310,17 +317,28 @@ operations research.`,
       school:   "Southern University of Science and Technology (SUSTech)",
       degree:   "B.Eng. in Applied Mathematics (Industrial Engineering)",
       period:   "Sep 2025 – Jun 2029 (Expected)",
-      gpa:      "3.87",
+      gpa:      "3.91",
       gpaScale: "4.0",
-      rank:     "119/1363 ",
+      rank:     "80/1363 (Top 5.9%)",
       courses: [
-        { name: "Mathematical Analysis I",        grade: "93 (A)" },
-        { name: "Linear Algebra",                 grade: "89 (B+)" },
-        { name: "College Physics I",              grade: "87 (B+)" },
-        { name: "Experiments of Fundamental Physics", grade: "95 (A)" },
-        { name: "Introduction to C Programming",  grade: "96 (A)" },
-        { name: "College Earth Science",          grade: "93 (A)" },
-        { name: "SUSTech English II",             grade: "96 (A)" },
+        // ── 2025 Fall (大一上) ──
+        { sem: "2025 Fall", name: "Mathematical Analysis I",           grade: "93 (A)" },
+        { sem: "2025 Fall", name: "Linear Algebra",                    grade: "89 (B+)" },
+        { sem: "2025 Fall", name: "College Physics I",                 grade: "87 (B+)" },
+        { sem: "2025 Fall", name: "Experiments of Fundamental Physics", grade: "95 (A)" },
+        { sem: "2025 Fall", name: "Introduction to C Programming",     grade: "96 (A)" },
+        { sem: "2025 Fall", name: "College Earth Science",             grade: "93 (A)" },
+        { sem: "2025 Fall", name: "SUSTech English II",                grade: "96 (A)" },
+        // ── 2026 Spring (大一下) ──
+        { sem: "2026 Spring", name: "Mathematical Analysis II",                    grade: "96 (A)" },
+        { sem: "2026 Spring", name: "Ordinary Differential Equations B",           grade: "98 (A+)" },
+        { sem: "2026 Spring", name: "College Physics II",                          grade: "90 (A-)" },
+        { sem: "2026 Spring", name: "Foundation of Probability Theory",            grade: "94 (A)" },
+        { sem: "2026 Spring", name: "English for Fluency",                         grade: "98 (A+)" },
+        { sem: "2026 Spring", name: "Morality and Rule of Law",                    grade: "97 (A+)" },
+        { sem: "2026 Spring", name: "The Outline of Modern & Contemporary History of China", grade: "96 (A)" },
+        { sem: "2026 Spring", name: "Chorus",                                      grade: "99 (A+)" },
+        { sem: "2026 Spring", name: "Physical Education II",                       grade: "88 (B+)" },
       ],
     },
   ],
@@ -496,11 +514,23 @@ function renderPage() {
         ${e.rank ? `<span style="margin-left:10px;color:#6b7280;">Rank: ${e.rank}</span>` : ''}
       </div>
       <div class="courses-grid">
-        ${e.courses.map(c => `
-          <div class="course-row">
-            <span class="course-name">${c.name}</span>
-            <span class="course-grade">${c.grade}</span>
-          </div>`).join('')}
+        ${(() => {
+          const sems = {};
+          e.courses.forEach(c => {
+            const s = c.sem || 'Courses';
+            if (!sems[s]) sems[s] = [];
+            sems[s].push(c);
+          });
+          return Object.entries(sems).map(([sem, list]) => `
+            <div class="semester-group">
+              <div class="semester-label">${sem}</div>
+              ${list.map(c => `
+                <div class="course-row">
+                  <span class="course-name">${c.name}</span>
+                  <span class="course-grade">${c.grade}</span>
+                </div>`).join('')}
+            </div>`).join('');
+        })()}
       </div>
     </div>`).join('');
 
