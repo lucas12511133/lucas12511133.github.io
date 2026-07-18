@@ -77,10 +77,19 @@
       padding: 88px 0 72px;
       background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 60%);
       border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background:
+        radial-gradient(ellipse 600px 300px at 85% 20%, rgba(37,99,235,.06) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 200px at 20% 80%, rgba(124,58,237,.04) 0%, transparent 70%);
+      pointer-events: none;
     }
     .hero-inner {
       max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
       display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center;
+      position: relative; z-index: 1;
     }
     .hero-tag {
       display: inline-flex; align-items: center; gap: 6px;
@@ -113,11 +122,11 @@
     .btn-ghost:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
 
     .avatar-wrap {
-      width: 160px; height: 160px; border-radius: 50%;
+      width: 180px; height: 240px; border-radius: 12px;
       background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
       display: flex; align-items: center; justify-content: center;
-      font-size: 3.5rem; flex-shrink: 0; box-shadow: var(--shadow-md);
-      overflow: hidden;
+      font-size: 4rem; flex-shrink: 0; box-shadow: var(--shadow-md);
+      overflow: hidden; /* 3:4 portrait ratio */
     }
     .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -262,7 +271,7 @@
     ============================================================ */
     @media (max-width: 640px) {
       .hero-inner { grid-template-columns: 1fr; }
-      .avatar-wrap { width: 120px; height: 120px; font-size: 2.5rem; }
+      .avatar-wrap { width: 120px; height: 160px; font-size: 2.5rem; }
       .nav-links { gap: 16px; }
       .nav-links a:nth-child(n+5) { display: none; }
       section { padding: 52px 0; }
@@ -283,32 +292,38 @@
 <script>
 const PROFILE = {
   // ── Basic Info ──────────────────────────────────────────────
-  name:        "Lucas",               // Your preferred name
+  name:        "Lucas",
   fullName:    "Lucas Lu",
-  photo:       "avatar.jpg",          // URL or local path to photo, leave empty for initials
-  initials:    "L",                   // Shown when no photo
-  tagline:     "Industrial Engineering",
-  university:  "Southern University of Science and Technology (SUSTech)",
+  photo:       "avatar.jpg",
+  initials:    "L",
+  tagline:     "Applied Mathematics · Industrial Engineering",
+  university:  "Southern University of Science and Technology",
+  college:     "Zhicheng College",
   location:    "Shenzhen, China",
-  year:        "Class of 2025",
+  year:        "B.Eng. Candidate · Class of 2029",
   email:       "12511133@mail.sustech.edu.cn",
   github:      "https://github.com/lucas12511133",
-  linkedin:    "",                    // leave empty to hide
-  cv:          "",                    // link to PDF CV, leave empty to hide
+  linkedin:    "",
+  cv:          "",
 
   // ── About ────────────────────────────────────────────────────
-  about: `I am a first-year undergraduate at SUSTech majoring in Applied Mathematics 
-(Industrial Engineering track). My academic interests lie at the intersection of 
-mathematical modeling, optimization, and data-driven decision making. I am actively 
-seeking research opportunities to build toward a PhD in applied mathematics or 
-operations research.`,
+  about: `I am an undergraduate researcher at SUSTech majoring in Applied Mathematics 
+(Industrial Engineering track), affiliated with Zhicheng College. My work centers on 
+mathematical optimization and data-driven decision making, with a strong interest in 
+applying operations research to public welfare and emergency response systems.
+
+Currently, I lead a team project on optimizing the placement of emergency medical 
+service (EMS) stations in Shenzhen, achieving 90% coverage within a 10-minute response 
+time. I am also exploring the optimal deployment of AED devices in the Gulongzhong 
+scenic area through static vs. dynamic "human-vehicle-drone" coordinated schemes. 
+I aim to pursue a PhD in operations research or applied mathematics.`,
 
   interests: [
-    "Optimization & Operations Research",
-    "Probability & Stochastic Processes",
+    "Operations Research & Optimization",
+    "Emergency Response & Logistics",
     "Machine Learning / Data Science",
     "Mathematical Modeling",
-    "Human Activity Recognition",
+    "Linear & Integer Programming",
   ],
 
   // ── Education ────────────────────────────────────────────────
@@ -346,16 +361,37 @@ operations research.`,
   // ── Research & Projects ──────────────────────────────────────
   research: [
     {
-      title:  "Human Activity Recognition (HAR) using UCI HAR Dataset",
-      role:   "Undergraduate Researcher",
-      period: "2026",
-      desc:   "Investigated machine learning approaches for recognizing human activities " +
-              "(walking, running, sitting, etc.) from wearable sensor data. " +
-              "Explored feature engineering and classification algorithms on the UCI HAR benchmark.",
-      tags:   ["Machine Learning", "Signal Processing", "Python", "scikit-learn"],
+      title:  "EMS Station Location Optimization for Shenzhen City",
+      role:   "Project Lead",
+      period: "2025 – Present",
+      desc:   "Leading a 6-member team to optimize the placement of emergency medical service (EMS) stations across Shenzhen. " +
+              "Partitioned the city into 5,279 500m×500m grids and developed an XGBoost-based ETA prediction model (14 features, " +
+              "MAE=1.64 min, R²=0.863) using 620K+ ambulance dispatch records and 360K real ETA samples from Tencent Maps API. " +
+              "Achieved 90% coverage within a 10-minute response threshold. Finalist in the 8th China University Mechanical " +
+              "Engineering Innovation & Creativity Competition (2026). Advisor: Prof. Yu Wang.",
+      tags:   ["Operations Research", "XGBoost", "OSMnx", "Optimization", "Python"],
       link:   "",
     },
-    // Add more projects here following the same structure
+    {
+      title:  "AED Deployment Optimization at Gulongzhong Scenic Area",
+      role:   "Undergraduate Researcher",
+      period: "2026 – Present",
+      desc:   "Investigating optimal Automated External Defibrillator (AED) placement strategies in the Gulongzhong (古隆中) " +
+              "scenic area. Compared static fixed deployment against a dynamic 'human-vehicle-drone' coordinated scheme using " +
+              "OSMnx road network analysis. Exploring insurance partnership models with Ping An Insurance for sustainable operation.",
+      tags:   ["Optimization", "OSMnx", "Network Analysis", "Public Health"],
+      link:   "",
+    },
+    {
+      title:  "Human Activity Recognition using UCI HAR Dataset",
+      role:   "Course Project",
+      period: "2026",
+      desc:   "Explored machine learning approaches for classifying human activities (walking, sitting, standing, etc.) " +
+              "from wearable accelerometer and gyroscope data. Compared SVM, Random Forest, and MLP classifiers on the " +
+              "UCI HAR benchmark dataset with feature engineering.",
+      tags:   ["Machine Learning", "scikit-learn", "Signal Processing", "Python"],
+      link:   "",
+    },
   ],
 
   // ── Awards & Honors ──────────────────────────────────────────
@@ -428,16 +464,16 @@ operations research.`,
   // ── Skills ───────────────────────────────────────────────────
   skills: [
     {
-      group: "Mathematics",
-      tags:  ["Calculus", "ODE", "Probability", "Linear Algebra", "Statistics"],
+      group: "Mathematics & OR",
+      tags:  ["Calculus", "Linear Algebra", "Probability", "ODE", "Optimization", "Linear Programming"],
     },
     {
       group: "Programming",
-      tags:  ["Python", "MATLAB", "R", "LaTeX"],
+      tags:  ["Python", "MATLAB", "LaTeX", "R"],
     },
     {
-      group: "Tools & Frameworks",
-      tags:  ["scikit-learn", "NumPy", "Pandas", "Matplotlib", "Jupyter"],
+      group: "ML & Data",
+      tags:  ["XGBoost", "scikit-learn", "NumPy", "Pandas", "Matplotlib", "OSMnx"],
     },
     {
       group: "Languages",
@@ -470,6 +506,10 @@ function renderPage() {
   document.getElementById('hero-uni').textContent    = p.university;
   document.getElementById('hero-loc').textContent    = p.location;
   document.getElementById('hero-year').textContent   = p.year;
+  if (p.college) {
+    document.getElementById('hero-college').textContent = p.college;
+    document.getElementById('hero-college-item').style.display = '';
+  }
 
   // Avatar
   const av = document.querySelector('.avatar-wrap');
@@ -644,6 +684,10 @@ function initActiveNav() {
         <span class="hero-meta-item">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           <span id="hero-uni">—</span>
+        </span>
+        <span class="hero-meta-item" id="hero-college-item" style="display:none">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <span id="hero-college">—</span>
         </span>
         <span class="hero-meta-item">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
