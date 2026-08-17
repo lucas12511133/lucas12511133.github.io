@@ -1,770 +1,872 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Academic Profile</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lucas Lu is an Industrial Engineering student at SUSTech working on operations research, emergency response systems, and data-driven optimization.">
+  <meta name="theme-color" content="#f3f0e8">
+  <title>Lucas Lu — Operations Research &amp; Optimization</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%232349d8'/%3E%3Cpath d='M18 14v36h25v-8H27V14z' fill='%23f3f0e8'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" rel="stylesheet">
   <style>
-    /* ============================================================
-       TOKENS & RESET
-    ============================================================ */
     :root {
-      --bg: #ffffff;
-      --surface: #f8f9fb;
-      --border: #e4e7ec;
-      --text: #111827;
-      --muted: #6b7280;
-      --accent: #2563eb;
-      --accent-light: #eff6ff;
-      --accent-dark: #1d4ed8;
-      --green: #059669;
-      --gold: #d97706;
-      --radius: 8px;
-      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
-      --shadow-md: 0 4px 12px rgba(0,0,0,.1);
-      --max-w: 860px;
-      --nav-h: 56px;
+      --paper: #f3f0e8;
+      --paper-deep: #e8e3d7;
+      --ink: #121619;
+      --muted: #626661;
+      --cobalt: #2349d8;
+      --cobalt-dark: #1732a3;
+      --acid: #d7ff45;
+      --white: #fcfbf7;
+      --hairline: rgba(18, 22, 25, .13);
+      --serif: "Newsreader", "Noto Serif SC", Georgia, serif;
+      --sans: "Manrope", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --display: clamp(4.2rem, 10.8vw, 10.5rem);
+      --section: clamp(3.2rem, 7vw, 6.8rem);
+      --radius-xl: 2.25rem;
+      --radius-lg: 1.6rem;
+      --max: 1480px;
+      --ease: cubic-bezier(.32, .72, 0, 1);
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      pointer-events: none;
+      opacity: .12;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { color: inherit; font: inherit; }
     img { display: block; max-width: 100%; }
-    ul { list-style: none; }
+    ::selection { background: var(--cobalt); color: white; }
 
-    /* ============================================================
-       LAYOUT UTILS
-    ============================================================ */
-    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
-    section { padding: 72px 0; }
-    section:nth-child(even) { background: var(--surface); }
-    .section-title {
-      font-size: 1rem; font-weight: 600; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 32px; display: flex; align-items: center; gap: 10px;
+    .skip-link {
+      position: fixed;
+      left: 1rem;
+      top: 1rem;
+      z-index: 30;
+      padding: .8rem 1rem;
+      background: var(--ink);
+      color: white;
+      transform: translateY(-180%);
+      transition: transform .5s var(--ease);
     }
-    .section-title::after {
-      content: ''; flex: 1; height: 1px; background: var(--border);
+    .skip-link:focus { transform: translateY(0); }
+    .shell { width: min(calc(100% - 5rem), var(--max)); margin-inline: auto; }
+    .rule { height: 1px; background: var(--hairline); }
+    .mono {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
     }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .55rem .85rem;
+      border-radius: 999px;
+      background: rgba(18, 22, 25, .055);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: .42rem; aspect-ratio: 1; border-radius: 50%; background: currentColor; }
+    .reveal {
+      opacity: 0;
+      transform: translateY(3.5rem);
+      filter: blur(8px);
+      transition: opacity .9s var(--ease), transform .9s var(--ease), filter .9s var(--ease);
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+    .reveal[data-delay="1"] { transition-delay: .08s; }
+    .reveal[data-delay="2"] { transition-delay: .16s; }
+    .reveal[data-delay="3"] { transition-delay: .24s; }
 
-    /* ============================================================
-       NAVIGATION
-    ============================================================ */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      height: var(--nav-h); background: rgba(255,255,255,.92);
-      backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+    .site-nav {
+      position: fixed;
+      top: 1.1rem;
+      left: 50%;
+      z-index: 10;
+      width: min(calc(100% - 2rem), 820px);
+      opacity: 0;
+      transform: translate(-50%, -2rem);
+      border: 1px solid rgba(255, 255, 255, .48);
+      border-radius: 999px;
+      background: rgba(243, 240, 232, .78);
+      box-shadow: 0 16px 60px rgba(33, 37, 35, .08), inset 0 1px rgba(255, 255, 255, .7);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: opacity .9s var(--ease), transform .9s var(--ease);
     }
-    .nav-inner {
-      max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
-      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    body.page-ready .site-nav { opacity: 1; transform: translate(-50%, 0); }
+    .nav-inner { height: 3.6rem; padding: .4rem .45rem .4rem 1.25rem; display: flex; align-items: center; gap: 1.6rem; }
+    .brand { margin-right: auto; display: flex; align-items: center; gap: .7rem; font-size: .78rem; font-weight: 700; }
+    .brand-mark { width: .58rem; aspect-ratio: 1; background: var(--cobalt); border-radius: 50%; box-shadow: 0 0 0 .28rem rgba(35,73,216,.12); }
+    .nav-links { display: flex; align-items: center; gap: .25rem; }
+    .nav-links a, .nav-links button {
+      padding: .72rem .85rem;
+      border-radius: 999px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color .55s var(--ease), background .55s var(--ease);
     }
-    .nav-logo { font-weight: 700; font-size: .95rem; color: var(--text); letter-spacing: -.02em; }
-    .nav-links { display: flex; gap: 28px; }
-    .nav-links a {
-      font-size: .875rem; font-weight: 500; color: var(--muted);
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--accent); text-decoration: none; }
+    .nav-links a:hover, .nav-links a.active, .nav-links button:hover { color: var(--ink); background: rgba(18,22,25,.06); }
+    .nav-contact { padding: .78rem 1.05rem !important; background: var(--ink) !important; color: white !important; }
+    .menu-button { display: none; border: 0; background: transparent; width: 2.8rem; height: 2.8rem; border-radius: 50%; cursor: pointer; position: relative; }
+    .menu-button span { position: absolute; left: .75rem; width: 1.3rem; height: 1px; background: currentColor; transition: transform .55s var(--ease); }
+    .menu-button span:first-child { transform: translateY(-4px); }
+    .menu-button span:last-child { transform: translateY(4px); }
+    .menu-button[aria-expanded="true"] span:first-child { transform: rotate(45deg); }
+    .menu-button[aria-expanded="true"] span:last-child { transform: rotate(-45deg); }
 
-    /* ============================================================
-       HERO
-    ============================================================ */
-    #hero {
-      padding: 88px 0 72px;
-      background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 60%);
-      border-bottom: 1px solid var(--border);
-      position: relative; overflow: hidden;
+    .hero { min-height: 100dvh; padding: 9.5rem 0 3rem; display: flex; align-items: stretch; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(390px, .88fr); gap: 1.25rem; }
+    .hero-copy { padding: 2rem 0 1rem; display: flex; flex-direction: column; }
+    .hero-kicker { display: flex; align-items: center; gap: 1rem; color: var(--cobalt); }
+    .hero-kicker::after { content: ""; width: 5rem; height: 1px; background: currentColor; }
+    h1 {
+      margin: clamp(2rem, 7vh, 5.5rem) 0 0;
+      font-family: var(--serif);
+      font-size: var(--display);
+      font-weight: 400;
+      letter-spacing: -.075em;
+      line-height: .73;
     }
-    #hero::before {
-      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background:
-        radial-gradient(ellipse 600px 300px at 85% 20%, rgba(37,99,235,.06) 0%, transparent 70%),
-        radial-gradient(ellipse 400px 200px at 20% 80%, rgba(124,58,237,.04) 0%, transparent 70%);
+    h1 span { display: block; margin-left: .61em; color: var(--cobalt); font-style: italic; }
+    .identity-line {
+      min-height: 2.1rem;
+      margin: clamp(2.2rem, 5vh, 4rem) 0 0 .35rem;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: clamp(1.15rem, 1.8vw, 1.75rem);
+      letter-spacing: -.025em;
+    }
+    .typed-text { color: var(--ink); }
+    .type-caret { display: inline-block; width: .09em; height: .88em; margin-left: .12em; background: var(--cobalt); vertical-align: -.04em; animation: caret-pulse .9s steps(1) infinite; }
+    @keyframes caret-pulse { 50% { opacity: 0; } }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .55rem; margin: 1.4rem 0 0 .35rem; }
+    .window-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .64rem .85rem;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(18,22,25,.055);
+      color: var(--ink);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .55s var(--ease), background .55s var(--ease);
+    }
+    .window-trigger::after { content: "↗"; color: var(--cobalt); }
+    .window-trigger:hover { transform: translateY(-2px); background: rgba(35,73,216,.1); }
+    .hero-bottom { margin-top: auto; padding-top: 4.5rem; display: grid; grid-template-columns: minmax(240px, 1.05fr) minmax(210px, .75fr); gap: 2.5rem; align-items: end; }
+    .hero-intro { margin: 0; max-width: 590px; font-size: clamp(1rem, 1.25vw, 1.26rem); line-height: 1.75; letter-spacing: -.015em; }
+    .hero-meta { display: grid; gap: .75rem; color: var(--muted); font-size: .72rem; line-height: 1.45; }
+    .hero-meta div { display: grid; grid-template-columns: 3.8rem 1fr; gap: 1rem; padding-top: .7rem; border-top: 1px solid var(--hairline); }
+    .hero-meta b { color: var(--ink); font-weight: 600; }
+
+    .portrait-shell { padding: .48rem; border-radius: var(--radius-xl); background: rgba(18,22,25,.07); box-shadow: inset 0 1px rgba(255,255,255,.7); }
+    .portrait { height: 100%; min-height: 650px; overflow: hidden; position: relative; border-radius: calc(var(--radius-xl) - .48rem); background: #101424; }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; filter: saturate(.76) contrast(1.08); transform: scale(1.015); transition: transform 1.4s var(--ease), filter 1.4s var(--ease); }
+    .portrait:hover img { transform: scale(1.045); filter: saturate(.92) contrast(1.04); }
+    .portrait::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(8,12,19,.78)); }
+    .portrait-caption { position: absolute; z-index: 1; inset: auto 1.5rem 1.4rem; color: white; display: flex; justify-content: space-between; align-items: end; gap: 2rem; }
+    .portrait-caption strong { display: block; font-family: var(--serif); font-size: 1.55rem; font-weight: 400; }
+    .portrait-caption span { display: block; margin-top: .28rem; color: rgba(255,255,255,.68); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
+    .availability { flex: none; display: flex !important; align-items: center; gap: .45rem; color: white !important; white-space: nowrap; }
+    .availability::before { content: ""; width: .48rem; height: .48rem; border-radius: 50%; background: var(--acid); box-shadow: 0 0 0 .25rem rgba(215,255,69,.17); }
+
+    .signal { padding: 2rem 0 8rem; }
+    .signal-grid { display: grid; grid-template-columns: 1.08fr repeat(3, .64fr); border-top: 1px solid var(--hairline); }
+    .signal-intro, .metric { min-height: 200px; padding: 2rem 2rem 1rem 0; }
+    .metric { border-left: 1px solid var(--hairline); padding-left: 2rem; display: flex; flex-direction: column; justify-content: space-between; }
+    .signal-intro p { margin: 1.2rem 0 0; max-width: 31rem; color: var(--muted); font-family: var(--serif); font-size: 1.45rem; line-height: 1.35; }
+    .metric strong { font-family: var(--serif); font-size: clamp(2.8rem, 5vw, 5.2rem); font-weight: 400; line-height: .85; letter-spacing: -.06em; }
+    .metric span { max-width: 11rem; color: var(--muted); font-size: .7rem; line-height: 1.55; }
+
+    .section { padding: 8rem 0; }
+    .section-head { display: grid; grid-template-columns: .8fr 2.2fr; gap: 3rem; margin-bottom: 5rem; align-items: start; }
+    .section-head h2 { margin: -.12em 0 0; font-family: var(--serif); font-size: var(--section); font-weight: 400; line-height: .88; letter-spacing: -.06em; }
+    .section-head h2 em { color: var(--cobalt); font-weight: 400; }
+
+    .research { background: var(--ink); color: var(--paper); border-radius: 3.4rem 3.4rem 0 0; }
+    .research .eyebrow { background: rgba(255,255,255,.08); color: rgba(255,255,255,.7); }
+    .project-list { border-top: 1px solid rgba(255,255,255,.15); }
+    .project {
+      display: grid;
+      grid-template-columns: 5.6rem minmax(260px, .8fr) minmax(300px, 1fr) auto;
+      gap: 2.5rem;
+      padding: 3rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.15);
+      align-items: start;
+      transition: transform .65s var(--ease), opacity .65s var(--ease);
+    }
+    .project-list:hover .project { opacity: .45; }
+    .project-list .project:hover { opacity: 1; transform: translateX(.75rem); }
+    .project-index { color: rgba(255,255,255,.42); }
+    .project h3 { margin: -.18rem 0 .8rem; font-family: var(--serif); font-size: clamp(1.8rem, 3.1vw, 3.4rem); font-weight: 400; line-height: 1.02; letter-spacing: -.035em; }
+    .project-role { color: var(--acid); font-size: .66rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .project p { margin: 0; color: rgba(255,255,255,.64); font-size: .88rem; line-height: 1.78; }
+    .tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.25rem; }
+    .tags span { padding: .43rem .65rem; border-radius: 999px; background: rgba(255,255,255,.075); color: rgba(255,255,255,.72); font-size: .62rem; }
+    .project-year { color: rgba(255,255,255,.48); white-space: nowrap; }
+
+    .about { position: relative; overflow: hidden; background: var(--cobalt); color: white; }
+    .about::before { content: "OR"; position: absolute; right: -2vw; bottom: -13vw; color: rgba(255,255,255,.055); font-family: var(--serif); font-size: 44vw; line-height: .7; letter-spacing: -.12em; }
+    .about .shell { position: relative; }
+    .about-grid { display: grid; grid-template-columns: .82fr 1.5fr; gap: 7vw; align-items: start; }
+    .about-title { position: sticky; top: 7rem; }
+    .about-title h2 { margin: 1.8rem 0 0; font-family: var(--serif); font-size: var(--section); font-weight: 400; line-height: .88; letter-spacing: -.06em; }
+    .about-copy > p { margin: 0; max-width: 820px; font-family: var(--serif); font-size: clamp(1.7rem, 3.2vw, 3.4rem); line-height: 1.16; letter-spacing: -.035em; }
+    .about-copy > p em { color: var(--acid); font-weight: 400; }
+    .interest-list { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.28); }
+    .interest { display: grid; grid-template-columns: 3rem 1fr auto; gap: 1.5rem; padding: 1.45rem 0; border-bottom: 1px solid rgba(255,255,255,.28); align-items: center; }
+    .interest span:first-child { color: rgba(255,255,255,.55); }
+    .interest strong { font-size: .9rem; font-weight: 500; }
+    .interest i { color: var(--acid); font-family: var(--serif); font-size: 1.2rem; }
+
+    .record { background: var(--paper); }
+    .record-grid { display: grid; grid-template-columns: .92fr 1.08fr; gap: 1.25rem; }
+    .bezel { padding: .45rem; border-radius: var(--radius-xl); background: rgba(18,22,25,.055); box-shadow: inset 0 1px rgba(255,255,255,.78); }
+    .card { height: 100%; padding: clamp(1.6rem, 3vw, 3rem); border-radius: calc(var(--radius-xl) - .45rem); background: var(--white); box-shadow: inset 0 1px rgba(255,255,255,.8), 0 22px 70px rgba(31,34,31,.07); }
+    .education-card { display: flex; flex-direction: column; min-height: 550px; background: var(--paper-deep); }
+    .card-top { display: flex; justify-content: space-between; gap: 2rem; color: var(--muted); }
+    .education-card h3 { margin: 5.5rem 0 1rem; font-family: var(--serif); font-size: clamp(2rem, 4.2vw, 4.2rem); font-weight: 400; line-height: .95; letter-spacing: -.045em; }
+    .education-card .degree { color: var(--muted); font-size: .82rem; line-height: 1.7; }
+    .gpa-row { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 3rem; }
+    .gpa-row div { padding-top: 1rem; border-top: 1px solid var(--hairline); }
+    .gpa-row strong { display: block; font-family: var(--serif); font-size: 2.8rem; font-weight: 400; letter-spacing: -.05em; }
+    .gpa-row span { color: var(--muted); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; }
+    .detail-stack { display: grid; gap: 1.25rem; }
+    .course-card h3, .skills-card h3 { margin: 0 0 2.2rem; font-family: var(--serif); font-size: 2rem; font-weight: 400; }
+    details { border-top: 1px solid var(--hairline); }
+    details:last-child { border-bottom: 1px solid var(--hairline); }
+    summary { list-style: none; padding: 1.15rem 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: .78rem; font-weight: 600; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: rgba(18,22,25,.06); display: grid; place-items: center; transition: transform .55s var(--ease); }
+    details[open] summary::after { transform: rotate(45deg); }
+    .course-list { padding: .25rem 0 1.3rem; display: grid; gap: .7rem; }
+    .course-list div { display: grid; grid-template-columns: 1fr auto; gap: 1rem; color: var(--muted); font-size: .68rem; line-height: 1.45; }
+    .course-list b { color: var(--cobalt); }
+    .skill-lines { display: grid; gap: 1.2rem; }
+    .skill-line span { display: block; margin-bottom: .45rem; color: var(--cobalt); font-size: .62rem; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+    .skill-line p { margin: 0; color: var(--muted); font-family: var(--serif); font-size: 1.18rem; line-height: 1.45; }
+
+    .awards { padding-top: 0; }
+    .awards .section-head { padding-top: 8rem; border-top: 1px solid var(--hairline); }
+    .award-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 5vw; }
+    .award { display: grid; grid-template-columns: 3rem 1fr auto; gap: 1.2rem; padding: 1.45rem 0; border-top: 1px solid var(--hairline); align-items: start; }
+    .award:nth-last-child(-n+2) { border-bottom: 1px solid var(--hairline); }
+    .award-no { color: var(--cobalt); }
+    .award h3 { margin: 0; font-size: .83rem; font-weight: 600; line-height: 1.55; }
+    .award p { margin: .4rem 0 0; color: var(--muted); font-size: .68rem; line-height: 1.5; }
+    .award time { color: var(--muted); font-size: .66rem; }
+
+    .contact { padding: 8rem 0 2rem; background: var(--acid); }
+    .contact-top { display: flex; justify-content: space-between; align-items: start; gap: 3rem; }
+    .contact h2 { margin: 0; max-width: 980px; font-family: var(--serif); font-size: clamp(3.4rem, 8.5vw, 8.7rem); font-weight: 400; line-height: .82; letter-spacing: -.065em; }
+    .contact h2 em { color: var(--cobalt); font-weight: 400; }
+    .cta {
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: .48rem .48rem .48rem 1.35rem;
+      border-radius: 999px;
+      background: var(--ink);
+      color: white;
+      font-size: .74rem;
+      font-weight: 700;
+      transition: transform .65s var(--ease), background .65s var(--ease);
+    }
+    .cta:hover { transform: translateY(-3px); background: var(--cobalt); }
+    .cta:active { transform: scale(.98); }
+    .cta-icon { width: 2.75rem; height: 2.75rem; border-radius: 50%; background: rgba(255,255,255,.12); display: grid; place-items: center; transition: transform .65s var(--ease); }
+    .cta:hover .cta-icon { transform: translate(.22rem, -.12rem) scale(1.05); }
+    .contact-links { margin-top: 7rem; padding: 1.5rem 0; border-top: 1px solid rgba(18,22,25,.25); border-bottom: 1px solid rgba(18,22,25,.25); display: flex; gap: 2rem; flex-wrap: wrap; }
+    .contact-links a { font-size: .72rem; font-weight: 700; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .35rem; }
+    footer { padding: 2rem 0 0; display: flex; justify-content: space-between; gap: 2rem; color: rgba(18,22,25,.58); font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; }
+
+    .window-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 16;
+      display: grid;
+      place-items: center;
+      padding: 5rem 1.5rem 1.5rem;
+      visibility: hidden;
       pointer-events: none;
     }
-    .hero-inner {
-      max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
-      display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center;
-      position: relative; z-index: 1;
+    .window-layer.is-open { visibility: visible; pointer-events: auto; }
+    .window-backdrop {
+      position: absolute;
+      inset: 0;
+      border: 0;
+      background: rgba(13,16,18,.52);
+      opacity: 0;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      cursor: default;
+      transition: opacity .7s var(--ease);
     }
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--accent-light); color: var(--accent);
-      font-size: .78rem; font-weight: 600; letter-spacing: .06em;
-      text-transform: uppercase; padding: 4px 10px; border-radius: 20px;
-      margin-bottom: 16px;
+    .window-layer.is-open .window-backdrop { opacity: 1; }
+    .info-window {
+      position: relative;
+      display: none;
+      width: min(920px, 100%);
+      max-height: min(760px, calc(100dvh - 7rem));
+      padding: .46rem;
+      border-radius: 2rem;
+      background: rgba(255,255,255,.23);
+      box-shadow: 0 40px 120px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.72);
+      opacity: 0;
+      transform: translateY(4rem) scale(.94);
+      transition: opacity .75s var(--ease), transform .75s var(--ease);
     }
-    .hero-name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15;
-      letter-spacing: -.03em; color: var(--text); margin-bottom: 12px;
+    .info-window.is-active { display: block; }
+    .window-layer.is-open .info-window.is-active { opacity: 1; transform: translateY(0) scale(1); }
+    .window-core { max-height: calc(100dvh - 7.9rem); overflow-y: auto; border-radius: calc(2rem - .46rem); background: var(--white); box-shadow: inset 0 1px rgba(255,255,255,.9); }
+    .window-bar { position: sticky; top: 0; z-index: 1; min-height: 3.6rem; padding: .8rem 1rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-bottom: 1px solid var(--hairline); background: rgba(252,251,247,.88); backdrop-filter: blur(16px); }
+    .window-dots { display: flex; gap: .42rem; }
+    .window-dots i { width: .62rem; aspect-ratio: 1; border-radius: 50%; background: #ff695e; }
+    .window-dots i:nth-child(2) { background: #f2bd45; }
+    .window-dots i:nth-child(3) { background: #57c454; }
+    .window-title { font-size: .64rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .window-close { justify-self: end; width: 2.1rem; height: 2.1rem; border: 0; border-radius: 50%; background: rgba(18,22,25,.065); cursor: pointer; transition: transform .55s var(--ease), background .55s var(--ease); }
+    .window-close:hover { transform: rotate(90deg); background: rgba(18,22,25,.11); }
+    .window-content { padding: clamp(1.5rem, 4vw, 4rem); }
+    .window-kicker { color: var(--cobalt); }
+    .window-content h2 { max-width: 720px; margin: 1.4rem 0 2.4rem; font-family: var(--serif); font-size: clamp(2.6rem, 6vw, 5.8rem); font-weight: 400; line-height: .88; letter-spacing: -.06em; }
+    .window-content h2 em { color: var(--cobalt); font-weight: 400; }
+    .window-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; padding-top: 2rem; border-top: 1px solid var(--hairline); }
+    .window-columns p { margin: 0; color: var(--muted); font-size: .83rem; line-height: 1.8; }
+    .window-facts { display: grid; gap: .8rem; }
+    .window-facts div { display: grid; grid-template-columns: 5rem 1fr; gap: 1rem; padding-bottom: .8rem; border-bottom: 1px solid var(--hairline); font-size: .7rem; line-height: 1.5; }
+    .window-facts span { color: var(--muted); }
+    .cv-list { display: grid; gap: 0; border-top: 1px solid var(--hairline); }
+    .cv-row { display: grid; grid-template-columns: 6rem 1fr auto; gap: 1.5rem; padding: 1.25rem 0; border-bottom: 1px solid var(--hairline); align-items: start; }
+    .cv-row span, .cv-row time { color: var(--muted); font-size: .66rem; line-height: 1.5; }
+    .cv-row strong { font-family: var(--serif); font-size: 1.22rem; font-weight: 400; }
+    .cv-note { margin: 2rem 0 0; padding: 1rem 1.2rem; border-radius: 1rem; background: var(--paper); color: var(--muted); font-size: .7rem; line-height: 1.6; }
+    .cv-actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-bottom: 1rem; }
+    .cv-action {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .72rem 1rem;
+      border-radius: 999px;
+      background: var(--ink);
+      color: white;
+      font-size: .68rem;
+      font-weight: 700;
+      transition: transform .55s var(--ease), background .55s var(--ease);
     }
-    .hero-subtitle { font-size: 1.05rem; color: var(--muted); margin-bottom: 20px; line-height: 1.7; }
-    .hero-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
-    .hero-meta-item {
-      display: flex; align-items: center; gap: 6px;
-      font-size: .875rem; color: var(--muted);
-    }
-    .hero-meta-item svg { flex-shrink: 0; }
-    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 9px 18px; border-radius: var(--radius);
-      font-size: .875rem; font-weight: 600; transition: all .2s; cursor: pointer;
-    }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: var(--accent-dark); text-decoration: none; }
-    .btn-ghost { border: 1.5px solid var(--border); color: var(--text); background: #fff; }
-    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .cv-action.secondary { background: var(--paper); color: var(--ink); }
+    .cv-action:hover { transform: translateY(-2px); background: var(--cobalt); color: white; }
+    .cv-preview-shell { padding: .4rem; border-radius: 1.4rem; background: rgba(18,22,25,.07); box-shadow: inset 0 1px rgba(255,255,255,.8); }
+    .cv-preview { width: 100%; height: 520px; display: block; border: 0; border-radius: 1.05rem; background: white; }
+    .contact-options { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .contact-option { min-height: 170px; padding: 1.5rem; border-radius: 1.35rem; background: var(--paper); display: flex; flex-direction: column; justify-content: space-between; transition: transform .6s var(--ease), background .6s var(--ease); }
+    .contact-option:hover { transform: translateY(-4px); background: var(--acid); }
+    .contact-option span { color: var(--muted); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; }
+    .contact-option strong { overflow-wrap: anywhere; font-family: var(--serif); font-size: clamp(1.15rem, 2.4vw, 1.8rem); font-weight: 400; }
+    body.modal-open { overflow: hidden; }
 
-    .avatar-wrap {
-      width: 180px; height: 240px; border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 4rem; flex-shrink: 0; box-shadow: var(--shadow-md);
-      overflow: hidden; /* 3:4 portrait ratio */
+    @media (max-width: 1040px) {
+      .shell { width: min(calc(100% - 3rem), var(--max)); }
+      .hero-grid { grid-template-columns: 1fr .78fr; }
+      .hero-bottom { grid-template-columns: 1fr; }
+      .project { grid-template-columns: 3rem .8fr 1fr; }
+      .project-year { display: none; }
+      .about-grid { grid-template-columns: .65fr 1.35fr; }
     }
-    .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
-
-    /* ============================================================
-       ABOUT
-    ============================================================ */
-    .about-body { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 24px; }
-    .interest-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag {
-      background: var(--accent-light); color: var(--accent);
-      padding: 4px 12px; border-radius: 20px;
-      font-size: .8125rem; font-weight: 500;
+    @media (max-width: 767px) {
+      :root { --display: clamp(4rem, 23vw, 7rem); --section: clamp(3rem, 16vw, 5rem); --radius-xl: 1.6rem; }
+      .shell { width: calc(100% - 2rem); }
+      .site-nav { width: calc(100% - 1.25rem); top: .65rem; }
+      .nav-inner { height: 3.25rem; }
+      .menu-button { display: block; }
+      .nav-links {
+        position: fixed;
+        top: 4rem;
+        left: 0;
+        width: 100%;
+        padding: .7rem;
+        border-radius: 1.5rem;
+        background: rgba(243,240,232,.96);
+        box-shadow: 0 20px 60px rgba(18,22,25,.13);
+        backdrop-filter: blur(18px);
+        display: grid;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-1rem) scale(.97);
+        transition: opacity .55s var(--ease), transform .55s var(--ease);
+      }
+      .nav-links.open { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+      .nav-links a, .nav-links button { padding: .9rem 1rem; text-align: left; transform: translateY(.7rem); opacity: 0; transition: opacity .55s var(--ease), transform .55s var(--ease), background .55s var(--ease); }
+      .nav-links.open a, .nav-links.open button { opacity: 1; transform: translateY(0); }
+      .nav-links.open > :nth-child(2) { transition-delay: .06s; }
+      .nav-links.open > :nth-child(3) { transition-delay: .12s; }
+      .nav-links.open > :nth-child(4) { transition-delay: .18s; }
+      .nav-contact { text-align: center; margin-top: .3rem; }
+      .hero { min-height: 0; padding: 7.5rem 0 2rem; }
+      .hero-grid, .hero-bottom, .signal-grid, .section-head, .about-grid, .record-grid { grid-template-columns: 1fr; }
+      .hero-copy { min-height: 650px; padding-top: 0; }
+      h1 { margin-top: 4.5rem; }
+      h1 span { margin-left: .35em; }
+      .hero-bottom { margin-top: auto; padding-top: 3rem; gap: 2rem; }
+      .portrait-shell { min-height: 590px; }
+      .portrait { min-height: 580px; }
+      .portrait img { object-position: 50% 57%; }
+      .signal { padding: 1rem 0 6rem; }
+      .signal-intro, .metric { min-height: 150px; padding: 1.6rem 0; }
+      .metric { border-left: 0; border-top: 1px solid var(--hairline); }
+      .metric strong { font-size: 4rem; }
+      .section { padding: 6rem 0; }
+      .section-head { gap: 2rem; margin-bottom: 3.5rem; }
+      .research { border-radius: 2rem 2rem 0 0; }
+      .project { grid-template-columns: 2rem 1fr; gap: 1.2rem; padding: 2.5rem 0; }
+      .project p, .project .tags { grid-column: 2; }
+      .project-list:hover .project { opacity: 1; }
+      .project-list .project:hover { transform: none; }
+      .about-title { position: static; }
+      .about-copy > p { font-size: 2rem; }
+      .interest-list { margin-top: 3.5rem; }
+      .interest { grid-template-columns: 2rem 1fr auto; }
+      .education-card { min-height: 480px; }
+      .award-list { grid-template-columns: 1fr; }
+      .award:nth-last-child(-n+2) { border-bottom: 0; }
+      .award:last-child { border-bottom: 1px solid var(--hairline); }
+      .contact-top { display: grid; }
+      .contact h2 { font-size: 18vw; }
+      .cta { justify-self: start; }
+      .contact-links { margin-top: 5rem; }
+      footer { flex-direction: column; gap: .55rem; }
+      .window-layer { padding: 4.5rem .55rem .55rem; place-items: end center; }
+      .info-window { max-height: calc(100dvh - 4.75rem); border-radius: 1.55rem; transform: translateY(100%); }
+      .window-core { max-height: calc(100dvh - 5.65rem); border-radius: calc(1.55rem - .46rem); }
+      .window-columns, .contact-options { grid-template-columns: 1fr; gap: 1.5rem; }
+      .cv-row { grid-template-columns: 3.5rem 1fr; }
+      .cv-row time { grid-column: 2; }
+      .cv-preview { height: 58dvh; min-height: 430px; }
     }
-
-    /* ============================================================
-       EDUCATION
-    ============================================================ */
-    .edu-card {
-      background: #fff; border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 24px 28px;
-      box-shadow: var(--shadow); margin-bottom: 16px;
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+      .reveal { opacity: 1; transform: none; filter: none; }
+      .type-caret { animation: none; }
     }
-    .edu-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
-    .edu-school { font-size: 1.05rem; font-weight: 700; color: var(--text); }
-    .edu-degree { font-size: .9rem; color: var(--muted); margin-top: 2px; }
-    .edu-period { font-size: .8125rem; font-weight: 500; color: var(--muted); }
-    .edu-gpa {
-      margin-top: 12px; display: inline-flex; align-items: center; gap: 6px;
-      background: #f0fdf4; color: var(--green);
-      font-size: .875rem; font-weight: 600; padding: 4px 12px; border-radius: 20px;
-    }
-    .courses-grid {
-      margin-top: 16px; display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px;
-    }
-    .course-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 6px 10px; background: var(--surface); border-radius: 6px;
-      font-size: .8125rem;
-    }
-    .semester-group { margin-bottom: 14px; }
-    .semester-group:last-child { margin-bottom: 0; }
-    .semester-label {
-      font-size: .7rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: .08em; color: var(--accent); margin-bottom: 6px;
-      padding-left: 2px;
-    }
-    .course-name { color: var(--text); }
-    .course-grade {
-      font-weight: 700; color: var(--accent); flex-shrink: 0; margin-left: 8px;
-    }
-
-    /* ============================================================
-       RESEARCH
-    ============================================================ */
-    .research-card {
-      border-left: 3px solid var(--accent);
-      padding: 20px 24px; background: #fff;
-      border-radius: 0 var(--radius) var(--radius) 0;
-      box-shadow: var(--shadow); margin-bottom: 20px;
-    }
-    .research-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-    .research-meta {
-      font-size: .8125rem; color: var(--muted); margin-bottom: 10px;
-      display: flex; flex-wrap: wrap; gap: 12px;
-    }
-    .research-desc { font-size: .9rem; color: var(--muted); line-height: 1.7; }
-    .research-tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag-sm {
-      background: var(--surface); color: var(--text);
-      border: 1px solid var(--border);
-      padding: 2px 9px; border-radius: 12px; font-size: .75rem; font-weight: 500;
-    }
-    .badge-link {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: .78rem; font-weight: 600; color: var(--accent);
-      background: var(--accent-light); padding: 2px 9px; border-radius: 12px;
-    }
-
-    /* ============================================================
-       AWARDS
-    ============================================================ */
-    .awards-list { display: grid; gap: 12px; }
-    .award-row {
-      display: flex; align-items: flex-start; gap: 16px;
-      padding: 16px 20px; background: #fff;
-      border: 1px solid var(--border); border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .award-icon {
-      width: 36px; height: 36px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; flex-shrink: 0;
-    }
-    .award-icon.gold { background: #fffbeb; }
-    .award-icon.silver { background: #f1f5f9; }
-    .award-icon.blue { background: var(--accent-light); }
-    .award-body { flex: 1; }
-    .award-title { font-size: .9375rem; font-weight: 600; color: var(--text); }
-    .award-issuer { font-size: .8125rem; color: var(--muted); margin-top: 2px; }
-    .award-year { font-size: .8125rem; font-weight: 600; color: var(--muted); flex-shrink: 0; }
-
-    /* ============================================================
-       SKILLS
-    ============================================================ */
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-    .skill-group { }
-    .skill-group-title { font-size: .8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 10px; }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .skill-tag {
-      padding: 4px 12px; border-radius: 20px;
-      font-size: .8125rem; font-weight: 500;
-      background: var(--surface); border: 1px solid var(--border); color: var(--text);
-    }
-
-    /* ============================================================
-       CONTACT
-    ============================================================ */
-    #contact { text-align: center; }
-    #contact .container { max-width: 600px; }
-    .contact-intro { font-size: 1.05rem; color: var(--muted); margin-bottom: 32px; }
-    .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
-    .contact-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 10px 20px; border: 1.5px solid var(--border);
-      border-radius: var(--radius); font-size: .875rem; font-weight: 600;
-      color: var(--text); transition: all .2s; background: #fff;
-    }
-    .contact-link:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 24px 0; text-align: center;
-      font-size: .8125rem; color: var(--muted);
-    }
-
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
-    @media (max-width: 640px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .avatar-wrap { width: 120px; height: 160px; font-size: 2.5rem; }
-      .nav-links { gap: 16px; }
-      .nav-links a:nth-child(n+5) { display: none; }
-      section { padding: 52px 0; }
-    }
-
-    /* ============================================================
-       SCROLL FADE-IN
-    ============================================================ */
-    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
-    .fade-in.visible { opacity: 1; transform: none; }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- ============================================================
-     DATA LAYER — Edit PROFILE to update the entire page
-============================================================ -->
-<script>
-const PROFILE = {
-  // ── Basic Info ──────────────────────────────────────────────
-  name:        "Lucas",
-  fullName:    "卢胜 (Lucas Lu)",
-  photo:       "avatar.jpg",
-  initials:    "L",
-  tagline:     "Industrial Engineering",
-  university:  "Southern University of Science and Technology",
-  college:     "Zhicheng College · 致诚书院",
-  location:    "Shenzhen, China",
-  year:        "B.Eng. Candidate · Class of 2029 · 2025级",
-  email:       "12511133@mail.sustech.edu.cn",
-  github:      "https://github.com/lucas12511133",
-  linkedin:    "",
-  cv:          "",
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Lucas Lu — home"><span class="brand-mark"></span>Lucas Lu</a>
+      <button class="menu-button" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span></button>
+      <div class="nav-links" id="nav-links">
+        <a href="#research">Research</a>
+        <button type="button" data-window="info">Info</button>
+        <a href="#record">Record</a>
+        <button type="button" data-window="cv">CV</button>
+        <button class="nav-contact" type="button" data-window="contact">Contact</button>
+      </div>
+    </div>
+  </nav>
 
-  // ── About ────────────────────────────────────────────────────
-  about: `I am an undergraduate researcher at SUSTech majoring in Industrial Engineering, 
-affiliated with Zhicheng College (致诚书院). My work centers on mathematical optimization 
-and data-driven decision making, with a strong interest in applying operations research 
-to public welfare and emergency response systems.
-
-Currently, I lead a team project on optimizing the placement of emergency medical 
-service (EMS) stations in Shenzhen, achieving 90% coverage within a 10-minute response 
-time. I am also involved in a project on optimal AED deployment at the Gulongzhong 
-scenic area, comparing static placement vs. dynamic "human-vehicle-drone" coordinated 
-schemes. I aim to pursue a PhD in operations research or applied mathematics.`,
-
-  interests: [
-    "Operations Research & Optimization",
-    "运筹学与最优化",
-    "Emergency Response & Logistics",
-    "Machine Learning / Data Science",
-    "Mathematical Modeling",
-  ],
-
-  // ── Education ────────────────────────────────────────────────
-  education: [
-    {
-      school:   "Southern University of Science and Technology (SUSTech)",
-      degree:   "B.Eng. in Industrial Engineering · 致诚书院",
-      period:   "Sep 2025 – Jun 2029 (Expected)",
-      gpa:      "3.91",
-      gpaScale: "4.0",
-      rank:     "1/11 (Top 5.9%)",
-      courses: [
-        // ── 2025 Fall (大一上) ──
-        { sem: "2025 Fall", name: "Mathematical Analysis I",           grade: "93 (A)" },
-        { sem: "2025 Fall", name: "Linear Algebra",                    grade: "89 (B+)" },
-        { sem: "2025 Fall", name: "College Physics I",                 grade: "87 (B+)" },
-        { sem: "2025 Fall", name: "Experiments of Fundamental Physics", grade: "95 (A)" },
-        { sem: "2025 Fall", name: "Introduction to C Programming",     grade: "96 (A)" },
-        { sem: "2025 Fall", name: "College Earth Science",             grade: "93 (A)" },
-        { sem: "2025 Fall", name: "SUSTech English II",                grade: "96 (A)" },
-        // ── 2026 Spring (大一下) ──
-        { sem: "2026 Spring", name: "Mathematical Analysis II",                    grade: "96 (A)" },
-        { sem: "2026 Spring", name: "Ordinary Differential Equations B",           grade: "98 (A+)" },
-        { sem: "2026 Spring", name: "College Physics II",                          grade: "90 (A-)" },
-        { sem: "2026 Spring", name: "Foundation of Probability Theory",            grade: "94 (A)" },
-        { sem: "2026 Spring", name: "English for Fluency",                         grade: "98 (A+)" },
-        { sem: "2026 Spring", name: "Morality and Rule of Law",                    grade: "97 (A+)" },
-        { sem: "2026 Spring", name: "The Outline of Modern & Contemporary History of China", grade: "96 (A)" },
-        { sem: "2026 Spring", name: "Chorus",                                      grade: "99 (A+)" },
-        { sem: "2026 Spring", name: "Physical Education II",                       grade: "88 (B+)" },
-      ],
-    },
-  ],
-
-  // ── Research & Projects ──────────────────────────────────────
-  research: [
-    {
-      title:  "120 EMS Station Location Optimization · 120急救站点选址优化",
-      role:   "Project Lead · 项目负责人",
-      period: "2026 – Present",
-      desc:   "Leading a 6-member team to optimize the placement of emergency medical service (EMS) stations across Shenzhen. " +
-              "Partitioned the city into 5,279 500m×500m grids and developed an XGBoost-based ETA prediction model (14 features, " +
-              "MAE=1.64 min, R²=0.863) using 620K+ ambulance dispatch records and 360K real ETA samples from Tencent Maps API. " +
-              "Achieved 90% coverage within a 10-minute response threshold. Finalist in the 8th China University Mechanical " +
-              "Engineering Innovation & Creativity Competition (2026). Advisor: Prof. Yu Wang.",
-      tags:   ["Operations Research", "XGBoost", "OSMnx", "Optimization", "Python"],
-      link:   "",
-    },
-    {
-      title:  "AED Deployment at Gulongzhong · 古隆中景区AED布设优化",
-      role:   "Project Participant · 项目参与者",
-      period: "2026 – Present",
-      desc:   "Investigating optimal Automated External Defibrillator (AED) placement strategies in the Gulongzhong (古隆中) " +
-              "scenic area. Compared static fixed deployment against a dynamic 'human-vehicle-drone' coordinated scheme using " +
-              "OSMnx road network analysis. Exploring insurance partnership models with Ping An Insurance for sustainable operation.",
-      tags:   ["Optimization", "OSMnx", "Network Analysis", "Public Health"],
-      link:   "",
-    },
-    {
-      title:  "Human Activity Recognition using UCI HAR Dataset",
-      role:   "Course Project",
-      period: "2026",
-      desc:   "Explored machine learning approaches for classifying human activities (walking, sitting, standing, etc.) " +
-              "from wearable accelerometer and gyroscope data. Compared SVM, Random Forest, and MLP classifiers on the " +
-              "UCI HAR benchmark dataset with feature engineering.",
-      tags:   ["Machine Learning", "scikit-learn", "Signal Processing", "Python"],
-      link:   "",
-    },
-  ],
-
-  // ── Awards & Honors ──────────────────────────────────────────
-  awards: [
-    {
-      icon:   "🌏",
-      style:  "gold",
-      title:  "APRU ULP 2026 Outstanding Student Ambassador · 优秀学生大使（全校仅十位）",
-      issuer: "APRU / SUSTech",
-      year:   "2026",
-    },
-    {
-      icon:   "🌟",
-      style:  "gold",
-      title:  "Outstanding Individual, 2026 Winter Social Practice · 寒假社会实践优秀实践个人",
-      issuer: "SUSTech",
-      year:   "2026",
-    },
-    {
-      icon:   "🏆",
-      style:  "gold",
-      title:  "Second Prize, 17th National College Student Mathematics Competition · 全国大学生数学竞赛（非数学A类）二等奖",
-      issuer: "Chinese Mathematical Society",
-      year:   "2025",
-    },
-    {
-      icon:   "⭐",
-      style:  "blue",
-      title:  "Outstanding Camper, 4th 'Xiancheng' Program · 先诚团优秀营员",
-      issuer: "Zhicheng College, SUSTech · 致诚书院",
-      year:   "2025",
-    },
-    {
-      icon:   "🎤",
-      style:  "blue",
-      title:  "Student Representative, Zhicheng College 10th Anniversary · 十周年生日会学生代表",
-      issuer: "Zhicheng College, SUSTech · 致诚书院",
-      year:   "2025",
-    },
-    {
-      icon:   "🎖️",
-      style:  "silver",
-      title:  "Mutual-Aid Star, 2025 SUSTech Military Training · 军训互助之星",
-      issuer: "SUSTech",
-      year:   "2025",
-    },
-    {
-      icon:   "🏅",
-      style:  "blue",
-      title:  "Outstanding Communist Youth League Member (Fall 2025) · 优秀共青团员",
-      issuer: "SUSTech",
-      year:   "2025",
-    },
-    {
-      icon:   "🤝",
-      style:  "silver",
-      title:  "Social Impact Award, 'Hundreds, Thousands, Myriads Project' · '百千万工程'突击队社会效益奖",
-      issuer: "Zhicheng College 'Chengguang' Volunteer Team · 致诚书院橙光志愿服务队",
-      year:   "2025",
-    },
-    {
-      icon:   "🏅",
-      style:  "blue",
-      title:  "Outstanding Volunteer Service Organization of 2025 · 年度优秀志愿服务组织",
-      issuer: "'Chengguang' Volunteer Team · 橙光志愿服务队",
-      year:   "2025",
-    },
-    {
-      icon:   "🥈",
-      style:  "silver",
-      title:  "Second Prize, Outstanding Team, 2026 Winter Social Practice · 寒假社会实践优秀团队二等奖",
-      issuer: "'Chengguang' Volunteer Team · 橙光志愿服务队",
-      year:   "2026",
-    },
-  ],
-
-  // ── Skills ───────────────────────────────────────────────────
-  skills: [
-    {
-      group: "Mathematics & OR",
-      tags:  ["Calculus", "Linear Algebra", "Probability", "ODE", "Optimization", "Linear Programming"],
-    },
-    {
-      group: "Programming",
-      tags:  ["Python", "MATLAB", "LaTeX", "R"],
-    },
-    {
-      group: "ML & Data",
-      tags:  ["XGBoost", "scikit-learn", "NumPy", "Pandas", "Matplotlib", "OSMnx"],
-    },
-    {
-      group: "Languages",
-      tags:  ["Chinese (Native)", "English (Proficient)"],
-    },
-  ],
-};
-</script>
-
-<!-- ============================================================
-     RENDER ENGINE
-============================================================ -->
-<script>
-// Runs after DOM loads
-document.addEventListener('DOMContentLoaded', () => {
-  renderPage();
-  initScrollFade();
-  initActiveNav();
-});
-
-function renderPage() {
-  const p = PROFILE;
-
-  // ── NAV ──────────────────────────────────────────────────────
-  document.querySelector('.nav-logo').textContent = p.name;
-
-  // ── HERO ─────────────────────────────────────────────────────
-  document.querySelector('.hero-name').textContent = p.fullName;
-  document.querySelector('.hero-subtitle').textContent = p.tagline;
-  document.getElementById('hero-uni').textContent    = p.university;
-  document.getElementById('hero-loc').textContent    = p.location;
-  document.getElementById('hero-year').textContent   = p.year;
-  if (p.college) {
-    document.getElementById('hero-college').textContent = p.college;
-    document.getElementById('hero-college-item').style.display = '';
-  }
-
-  // Avatar
-  const av = document.querySelector('.avatar-wrap');
-  if (p.photo) {
-    av.innerHTML = `<img src="${p.photo}" alt="${p.name}" />`;
-  } else {
-    av.textContent = p.initials;
-  }
-
-  // CTA buttons
-  const ctaDiv = document.querySelector('.hero-cta');
-  ctaDiv.innerHTML = '';
-  ctaDiv.innerHTML += `<a class="btn btn-primary" href="mailto:${p.email}">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/>
-    </svg>
-    Contact Me</a>`;
-  if (p.cv)       ctaDiv.innerHTML += `<a class="btn btn-ghost" href="${p.cv}" target="_blank">View CV</a>`;
-  if (p.github)   ctaDiv.innerHTML += `<a class="btn btn-ghost" href="${p.github}" target="_blank">GitHub</a>`;
-
-  // ── ABOUT ────────────────────────────────────────────────────
-  document.querySelector('.about-body').innerHTML = p.about.replace(/\n/g,'<br/>');
-  document.querySelector('.interest-tags').innerHTML =
-    p.interests.map(t => `<span class="tag">${t}</span>`).join('');
-
-  // ── EDUCATION ────────────────────────────────────────────────
-  const eduContainer = document.querySelector('.edu-cards');
-  eduContainer.innerHTML = p.education.map(e => `
-    <div class="edu-card">
-      <div class="edu-header">
-        <div>
-          <div class="edu-school">${e.school}</div>
-          <div class="edu-degree">${e.degree}</div>
+  <main id="main">
+    <header class="hero" id="top">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <div class="hero-kicker mono reveal">Industrial Engineering · SUSTech</div>
+          <h1 class="reveal" data-delay="1">Lucas <span>Lu.</span></h1>
+          <div class="identity-line reveal" data-delay="2"><span>I'm </span><span class="typed-text" aria-live="polite"></span><span class="type-caret" aria-hidden="true"></span></div>
+          <div class="hero-actions reveal" data-delay="3">
+            <button class="window-trigger" type="button" data-window="info">Info</button>
+            <button class="window-trigger" type="button" data-window="cv">CV</button>
+            <button class="window-trigger" type="button" data-window="contact">Contact</button>
+          </div>
+          <div class="hero-bottom reveal" data-delay="2">
+            <p class="hero-intro">I study how mathematical models and data can make public systems respond faster, allocate smarter, and serve people better.</p>
+            <div class="hero-meta">
+              <div><span>Based</span><b>Shenzhen, China</b></div>
+              <div><span>Focus</span><b>OR · Optimization · ML</b></div>
+              <div><span>Now</span><b>B.Eng. Candidate, 2029</b></div>
+            </div>
+          </div>
         </div>
-        <div class="edu-period">${e.period}</div>
+        <div class="portrait-shell reveal" data-delay="2">
+          <div class="portrait">
+            <img src="avatar.jpg" alt="Portrait of Lucas Lu" width="1535" height="2048">
+            <div class="portrait-caption">
+              <div><strong>卢胜</strong><span>致诚书院 · 2025级</span></div>
+              <span class="availability">Open to research</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="edu-gpa">
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17 5.8 21.3l2.4-7.4L2 9.4h7.6z"/>
-        </svg>
-        GPA: ${e.gpa} / ${e.gpaScale}
-        ${e.rank ? `<span style="margin-left:10px;color:#6b7280;">Rank: ${e.rank}</span>` : ''}
+    </header>
+
+    <section class="signal" aria-label="Featured research metrics">
+      <div class="shell signal-grid reveal">
+        <div class="signal-intro">
+          <span class="mono">Current signal</span>
+          <p>Optimizing emergency medical coverage across Shenzhen through real dispatch data.</p>
+        </div>
+        <div class="metric"><strong>620K+</strong><span>ambulance dispatch records studied</span></div>
+        <div class="metric"><strong>5,279</strong><span>urban grids modeled at 500 m resolution</span></div>
+        <div class="metric"><strong>90%</strong><span>coverage within a 10-minute threshold</span></div>
       </div>
-      <div class="courses-grid">
-        ${(() => {
-          const sems = {};
-          e.courses.forEach(c => {
-            const s = c.sem || 'Courses';
-            if (!sems[s]) sems[s] = [];
-            sems[s].push(c);
-          });
-          return Object.entries(sems).map(([sem, list]) => `
-            <div class="semester-group">
-              <div class="semester-label">${sem}</div>
-              ${list.map(c => `
-                <div class="course-row">
-                  <span class="course-name">${c.name}</span>
-                  <span class="course-grade">${c.grade}</span>
-                </div>`).join('')}
-            </div>`).join('');
-        })()}
+    </section>
+
+    <section class="section research" id="research">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="eyebrow">Selected work</span>
+          <h2>Research with<br><em>real-world stakes.</em></h2>
+        </div>
+        <div class="project-list">
+          <article class="project reveal">
+            <span class="project-index mono">01</span>
+            <div><h3>EMS Station Location Optimization</h3><span class="project-role">Project Lead · 120急救站点选址优化</span></div>
+            <div>
+              <p>Leading a six-person team to improve emergency medical station placement across Shenzhen. We combined road-network features with 360K real Tencent Maps ETA samples to train an XGBoost travel-time model, reaching MAE 1.64 min and R² 0.863. Finalist in the 8th China University Mechanical Engineering Innovation &amp; Creativity Competition.</p>
+              <div class="tags"><span>Operations Research</span><span>XGBoost</span><span>OSMnx</span><span>Python</span></div>
+            </div>
+            <time class="project-year mono">2026 — Now</time>
+          </article>
+          <article class="project reveal">
+            <span class="project-index mono">02</span>
+            <div><h3>AED Deployment at Gulongzhong</h3><span class="project-role">Researcher · 古隆中景区AED布设优化</span></div>
+            <div>
+              <p>Comparing fixed AED placement with a dynamic human–vehicle–drone response scheme using road-network analysis. The project also explores sustainable operating models through potential insurance partnerships.</p>
+              <div class="tags"><span>Optimization</span><span>Network Analysis</span><span>Public Health</span></div>
+            </div>
+            <time class="project-year mono">2026 — Now</time>
+          </article>
+          <article class="project reveal">
+            <span class="project-index mono">03</span>
+            <div><h3>Human Activity Recognition</h3><span class="project-role">Course Project · UCI HAR</span></div>
+            <div>
+              <p>Studied wearable accelerometer and gyroscope data to classify everyday activity. Compared SVM, Random Forest, and MLP classifiers with feature engineering on the UCI HAR benchmark.</p>
+              <div class="tags"><span>Machine Learning</span><span>scikit-learn</span><span>Signal Processing</span></div>
+            </div>
+            <time class="project-year mono">2026</time>
+          </article>
+        </div>
       </div>
-    </div>`).join('');
+    </section>
 
-  // ── RESEARCH ─────────────────────────────────────────────────
-  const resContainer = document.querySelector('.research-cards');
-  resContainer.innerHTML = p.research.map(r => `
-    <div class="research-card">
-      <div class="research-title">${r.title}</div>
-      <div class="research-meta">
-        <span>🔬 ${r.role}</span>
-        <span>📅 ${r.period}</span>
+    <section class="section about" id="about">
+      <div class="shell about-grid">
+        <div class="about-title reveal">
+          <span class="eyebrow">About / 关于</span>
+          <h2>Better<br>systems,<br>by design.</h2>
+        </div>
+        <div class="about-copy reveal" data-delay="1">
+          <p>I am an undergraduate researcher at SUSTech, drawn to problems where <em>mathematical rigor meets public value.</em></p>
+          <div class="interest-list">
+            <div class="interest"><span class="mono">01</span><strong>Operations Research &amp; Optimization</strong><i>运筹学与最优化</i></div>
+            <div class="interest"><span class="mono">02</span><strong>Emergency Response &amp; Logistics</strong><i>公共应急</i></div>
+            <div class="interest"><span class="mono">03</span><strong>Machine Learning &amp; Data Science</strong><i>数据驱动</i></div>
+            <div class="interest"><span class="mono">04</span><strong>Mathematical Modeling</strong><i>数学建模</i></div>
+          </div>
+        </div>
       </div>
-      <div class="research-desc">${r.desc}</div>
-      <div class="research-tags">
-        ${r.tags.map(t => `<span class="tag-sm">${t}</span>`).join('')}
-        ${r.link ? `<a class="badge-link" href="${r.link}" target="_blank">🔗 Link</a>` : ''}
+    </section>
+
+    <section class="section record" id="record">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="eyebrow">Academic record</span>
+          <h2>Built on strong<br><em>fundamentals.</em></h2>
+        </div>
+        <div class="record-grid">
+          <div class="bezel reveal">
+            <article class="card education-card">
+              <div class="card-top"><span class="mono">Education</span><span class="mono">2025 — 2029</span></div>
+              <h3>Southern University of Science and Technology</h3>
+              <p class="degree">B.Eng. in Industrial Engineering<br>Zhicheng College · 致诚书院</p>
+              <div class="gpa-row">
+                <div><strong>3.91</strong><span>GPA / 4.0</span></div>
+                <div><strong>1 / 11</strong><span>Current rank</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="detail-stack">
+            <div class="bezel reveal" data-delay="1">
+              <article class="card course-card">
+                <h3>Selected coursework</h3>
+                <details open>
+                  <summary>2026 Spring</summary>
+                  <div class="course-list">
+                    <div><span>Ordinary Differential Equations B</span><b>98 · A+</b></div>
+                    <div><span>Mathematical Analysis II</span><b>96 · A</b></div>
+                    <div><span>Foundation of Probability Theory</span><b>94 · A</b></div>
+                    <div><span>College Physics II</span><b>90 · A−</b></div>
+                  </div>
+                </details>
+                <details>
+                  <summary>2025 Fall</summary>
+                  <div class="course-list">
+                    <div><span>Introduction to C Programming</span><b>96 · A</b></div>
+                    <div><span>Mathematical Analysis I</span><b>93 · A</b></div>
+                    <div><span>Linear Algebra</span><b>89 · B+</b></div>
+                    <div><span>College Physics I</span><b>87 · B+</b></div>
+                  </div>
+                </details>
+              </article>
+            </div>
+            <div class="bezel reveal" data-delay="2">
+              <article class="card skills-card">
+                <h3>Working toolkit</h3>
+                <div class="skill-lines">
+                  <div class="skill-line"><span>Programming</span><p>Python, MATLAB, R, LaTeX</p></div>
+                  <div class="skill-line"><span>Data &amp; ML</span><p>XGBoost, scikit-learn, NumPy, Pandas, OSMnx</p></div>
+                  <div class="skill-line"><span>Languages</span><p>Chinese · Native &nbsp; / &nbsp; English · Proficient</p></div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>`).join('');
+    </section>
 
-  // ── AWARDS ───────────────────────────────────────────────────
-  const awardsContainer = document.querySelector('.awards-list');
-  awardsContainer.innerHTML = p.awards.map(a => `
-    <div class="award-row">
-      <div class="award-icon ${a.style}">${a.icon}</div>
-      <div class="award-body">
-        <div class="award-title">${a.title}</div>
-        <div class="award-issuer">${a.issuer}</div>
+    <section class="section awards" id="awards">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="eyebrow">Recognition</span>
+          <h2>Honors &amp;<br><em>community.</em></h2>
+        </div>
+        <div class="award-list">
+          <article class="award reveal"><span class="award-no mono">01</span><div><h3>APRU ULP Outstanding Student Ambassador</h3><p>APRU / SUSTech · 优秀学生大使（全校十位）</p></div><time>2026</time></article>
+          <article class="award reveal"><span class="award-no mono">02</span><div><h3>Second Prize, National College Student Mathematics Competition</h3><p>Chinese Mathematical Society · 非数学A类二等奖</p></div><time>2025</time></article>
+          <article class="award reveal"><span class="award-no mono">03</span><div><h3>Outstanding Individual, Winter Social Practice</h3><p>SUSTech · 寒假社会实践优秀实践个人</p></div><time>2026</time></article>
+          <article class="award reveal"><span class="award-no mono">04</span><div><h3>Outstanding Camper, “Xiancheng” Program</h3><p>Zhicheng College · 先诚团优秀营员</p></div><time>2025</time></article>
+          <article class="award reveal"><span class="award-no mono">05</span><div><h3>Social Impact Award, “Hundreds, Thousands, Myriads Project”</h3><p>Chengguang Volunteer Team · “百千万工程”突击队社会效益奖</p></div><time>2025</time></article>
+          <article class="award reveal"><span class="award-no mono">06</span><div><h3>Outstanding Communist Youth League Member</h3><p>SUSTech · 优秀共青团员</p></div><time>2025</time></article>
+          <article class="award reveal"><span class="award-no mono">07</span><div><h3>Outstanding Volunteer Service Organization</h3><p>Chengguang Volunteer Team · 年度优秀志愿服务组织</p></div><time>2025</time></article>
+          <article class="award reveal"><span class="award-no mono">08</span><div><h3>Second Prize, Outstanding Social Practice Team</h3><p>Chengguang Volunteer Team · 寒假社会实践优秀团队二等奖</p></div><time>2026</time></article>
+        </div>
       </div>
-      <div class="award-year">${a.year}</div>
-    </div>`).join('');
+    </section>
 
-  // ── SKILLS ───────────────────────────────────────────────────
-  const skillsContainer = document.querySelector('.skills-grid');
-  skillsContainer.innerHTML = p.skills.map(s => `
-    <div class="skill-group">
-      <div class="skill-group-title">${s.group}</div>
-      <div class="skill-tags">
-        ${s.tags.map(t => `<span class="skill-tag">${t}</span>`).join('')}
+    <section class="contact" id="contact">
+      <div class="shell">
+        <div class="contact-top reveal">
+          <h2>Let’s make systems<br><em>work better.</em></h2>
+          <a class="cta" href="mailto:12511133@mail.sustech.edu.cn"><span>Start a conversation</span><span class="cta-icon" aria-hidden="true">↗</span></a>
+        </div>
+        <div class="contact-links reveal" data-delay="1">
+          <a href="mailto:12511133@mail.sustech.edu.cn">Email</a>
+          <a href="https://github.com/lucas12511133" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <span class="mono">Shenzhen · UTC+8</span>
+        </div>
+        <footer><span>© <span id="year"></span> Lucas Lu / 卢胜</span><span>Designed for curiosity, built with care.</span></footer>
       </div>
-    </div>`).join('');
+    </section>
+  </main>
 
-  // ── CONTACT ──────────────────────────────────────────────────
-  const contactLinks = document.querySelector('.contact-links');
-  let links = `<a class="contact-link" href="mailto:${p.email}">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/>
-    </svg>${p.email}</a>`;
-  if (p.github)   links += `<a class="contact-link" href="${p.github}" target="_blank">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2C6.48 2 2 6.58 2 12.19c0 4.5 2.87 8.32 6.84 9.67.5.09.68-.22.68-.49v-1.7C6.86 20.2 6.28 18.3 6.28 18.3c-.45-1.17-1.1-1.48-1.1-1.48-.9-.63.07-.62.07-.62 1 .07 1.52 1.05 1.52 1.05.88 1.54 2.31 1.1 2.87.84.09-.65.34-1.1.62-1.35-2.19-.25-4.49-1.12-4.49-4.97 0-1.1.38-1.99 1.01-2.7-.1-.26-.44-1.28.1-2.66 0 0 .83-.27 2.71 1.03A9.3 9.3 0 0 1 12 8.84c.84.004 1.68.11 2.47.33 1.88-1.3 2.71-1.03 2.71-1.03.54 1.38.2 2.4.1 2.66.63.71 1.01 1.6 1.01 2.7 0 3.86-2.31 4.71-4.51 4.96.36.31.67.93.67 1.87v2.77c0 .27.18.59.69.49A10.2 10.2 0 0 0 22 12.19C22 6.58 17.52 2 12 2z"/>
-    </svg>GitHub</a>`;
-  if (p.linkedin) links += `<a class="contact-link" href="${p.linkedin}" target="_blank">LinkedIn</a>`;
-  if (p.cv)       links += `<a class="contact-link" href="${p.cv}" target="_blank">📄 Download CV</a>`;
-  contactLinks.innerHTML = links;
+  <div class="window-layer" aria-hidden="true">
+    <button class="window-backdrop" type="button" aria-label="Close window" data-close-window></button>
 
-  // ── FOOTER ───────────────────────────────────────────────────
-  document.getElementById('footer-name').textContent = p.fullName;
-  document.getElementById('footer-year').textContent = new Date().getFullYear();
-}
+    <section class="info-window" data-window-panel="info" role="dialog" aria-modal="true" aria-labelledby="info-title">
+      <div class="window-core">
+        <div class="window-bar">
+          <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="window-title">Info / Profile</span>
+          <button class="window-close" type="button" aria-label="Close Info window" data-close-window>×</button>
+        </div>
+        <div class="window-content">
+          <span class="window-kicker mono">A short introduction</span>
+          <h2 id="info-title">Research for<br><em>public value.</em></h2>
+          <div class="window-columns">
+            <p>I am Lucas Lu (卢胜), an Industrial Engineering undergraduate at Southern University of Science and Technology. My work sits between operations research, data-driven decision making, and public service systems—with a current focus on emergency response and medical resource deployment.</p>
+            <div class="window-facts">
+              <div><span>School</span><strong>SUSTech</strong></div>
+              <div><span>College</span><strong>Zhicheng · 致诚书院</strong></div>
+              <div><span>Based</span><strong>Shenzhen, China</strong></div>
+              <div><span>Goal</span><strong>PhD in OR / Applied Mathematics</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-// ── Scroll fade-in ────────────────────────────────────────────
-function initScrollFade() {
-  const els = document.querySelectorAll('.fade-in');
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  els.forEach(el => io.observe(el));
-}
+    <section class="info-window" data-window-panel="cv" role="dialog" aria-modal="true" aria-labelledby="cv-title">
+      <div class="window-core">
+        <div class="window-bar">
+          <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="window-title">Curriculum Vitae</span>
+          <button class="window-close" type="button" aria-label="Close CV window" data-close-window>×</button>
+        </div>
+        <div class="window-content">
+          <span class="window-kicker mono">Live academic snapshot · Current</span>
+          <h2 id="cv-title">The latest,<br><em>at a glance.</em></h2>
+          <div class="cv-list">
+            <div class="cv-row"><span>Education</span><strong>B.Eng. Industrial Engineering, SUSTech · GPA 3.91 / 4.0 · Rank 1 / 11</strong><time>2025 — 2029</time></div>
+            <div class="cv-row"><span>Research</span><strong>EMS Station Location Optimization · Project Lead</strong><time>2026 — Now</time></div>
+            <div class="cv-row"><span>Research</span><strong>AED Deployment at Gulongzhong · Researcher</strong><time>2026 — Now</time></div>
+            <div class="cv-row"><span>Honor</span><strong>National College Student Mathematics Competition · Second Prize</strong><time>2025</time></div>
+            <div class="cv-row"><span>Honor</span><strong>APRU ULP Outstanding Student Ambassador</strong><time>2026</time></div>
+          </div>
+          <p class="cv-note">The website above is the current source of truth. The downloadable PDF is an older May 2026 archive and has not yet been updated.</p>
+          <div class="cv-actions" style="margin-top:1rem;margin-bottom:0">
+            <a class="cv-action secondary" href="assets/lucas-lu-cv.pdf" download>Download archived PDF ↓</a>
+            <a class="cv-action secondary" href="assets/lucas-lu-cv.pdf" target="_blank" rel="noreferrer">View archive ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-// ── Active nav highlight ──────────────────────────────────────
-function initActiveNav() {
-  const sections = document.querySelectorAll('section[id], div[id="hero"]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
+    <section class="info-window" data-window-panel="contact" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+      <div class="window-core">
+        <div class="window-bar">
+          <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="window-title">Contact</span>
+          <button class="window-close" type="button" aria-label="Close Contact window" data-close-window>×</button>
+        </div>
+        <div class="window-content">
+          <span class="window-kicker mono">Open to research conversations</span>
+          <h2 id="contact-title">Say hello from<br><em>anywhere.</em></h2>
+          <div class="contact-options">
+            <a class="contact-option" href="mailto:12511133@mail.sustech.edu.cn"><span>Email</span><strong>12511133@mail.sustech.edu.cn ↗</strong></a>
+            <a class="contact-option" href="https://github.com/lucas12511133" target="_blank" rel="noreferrer"><span>GitHub</span><strong>@lucas12511133 ↗</strong></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    requestAnimationFrame(() => document.body.classList.add('page-ready'));
+
+    const menuButton = document.querySelector('.menu-button');
+    const navLinks = document.querySelector('.nav-links');
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      navLinks.classList.toggle('open', !isOpen);
     });
-  }, { passive: true });
-}
-</script>
+    navLinks.addEventListener('click', event => {
+      if (event.target.matches('a, button')) {
+        menuButton.setAttribute('aria-expanded', 'false');
+        navLinks.classList.remove('open');
+      }
+    });
 
-<!-- ============================================================
-     HTML SKELETON
-============================================================ -->
+    const typedElement = document.querySelector('.typed-text');
+    const typePhrases = [
+      'optimizing emergency response.',
+      'turning data into decisions.',
+      'designing systems for public good.'
+    ];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let phraseIndex = 0;
+    let characterIndex = 0;
+    let deleting = false;
+    function typeNextCharacter() {
+      const phrase = typePhrases[phraseIndex];
+      characterIndex += deleting ? -1 : 1;
+      typedElement.textContent = phrase.slice(0, characterIndex);
+      let delay = deleting ? 34 : 58;
+      if (!deleting && characterIndex === phrase.length) {
+        deleting = true;
+        delay = 1500;
+      } else if (deleting && characterIndex === 0) {
+        deleting = false;
+        phraseIndex = (phraseIndex + 1) % typePhrases.length;
+        delay = 380;
+      }
+      window.setTimeout(typeNextCharacter, delay);
+    }
+    if (reduceMotion) typedElement.textContent = typePhrases[0];
+    else window.setTimeout(typeNextCharacter, 900);
 
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <span class="nav-logo">—</span>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#education">Education</a>
-      <a href="#research">Research</a>
-      <a href="#awards">Awards</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
-</nav>
+    const windowLayer = document.querySelector('.window-layer');
+    const windowPanels = [...document.querySelectorAll('[data-window-panel]')];
+    let lastFocusedElement = null;
+    function openWindow(name) {
+      const panel = windowPanels.find(item => item.dataset.windowPanel === name);
+      if (!panel) return;
+      lastFocusedElement = document.activeElement;
+      windowPanels.forEach(item => item.classList.toggle('is-active', item === panel));
+      windowLayer.classList.add('is-open');
+      windowLayer.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      window.setTimeout(() => panel.querySelector('.window-close').focus(), 80);
+    }
+    function closeWindow() {
+      windowLayer.classList.remove('is-open');
+      windowLayer.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+      window.setTimeout(() => {
+        windowPanels.forEach(item => item.classList.remove('is-active'));
+        if (lastFocusedElement) lastFocusedElement.focus();
+      }, 720);
+    }
+    document.querySelectorAll('[data-window]').forEach(trigger => trigger.addEventListener('click', () => openWindow(trigger.dataset.window)));
+    document.querySelectorAll('[data-close-window]').forEach(trigger => trigger.addEventListener('click', closeWindow));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && windowLayer.classList.contains('is-open')) closeWindow();
+      if (event.key === 'Tab' && windowLayer.classList.contains('is-open')) {
+        const activePanel = document.querySelector('.info-window.is-active');
+        const focusable = [...activePanel.querySelectorAll('a[href], button:not([disabled])')];
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    });
 
-<!-- HERO -->
-<div id="hero">
-  <div class="hero-inner">
-    <div>
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .08, rootMargin: '0px 0px -6% 0px' });
+    document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
 
-      <h1 class="hero-name">—</h1>
-      <p class="hero-subtitle">—</p>
-      <div class="hero-meta">
-        <span class="hero-meta-item">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <span id="hero-uni">—</span>
-        </span>
-        <span class="hero-meta-item" id="hero-college-item" style="display:none">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          <span id="hero-college">—</span>
-        </span>
-        <span class="hero-meta-item">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span id="hero-loc">—</span>
-        </span>
-        <span class="hero-meta-item">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <span id="hero-year">—</span>
-        </span>
-      </div>
-      <div class="hero-cta"></div>
-    </div>
-    <div class="avatar-wrap">—</div>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <h2 class="section-title">About Me</h2>
-    <p class="about-body fade-in"></p>
-    <div class="interest-tags fade-in"></div>
-  </div>
-</section>
-
-<!-- EDUCATION -->
-<section id="education">
-  <div class="container">
-    <h2 class="section-title">Education</h2>
-    <div class="edu-cards fade-in"></div>
-  </div>
-</section>
-
-<!-- RESEARCH -->
-<section id="research">
-  <div class="container">
-    <h2 class="section-title">Research &amp; Projects</h2>
-    <div class="research-cards fade-in"></div>
-  </div>
-</section>
-
-<!-- AWARDS -->
-<section id="awards">
-  <div class="container">
-    <h2 class="section-title">Awards &amp; Honors</h2>
-    <div class="awards-list fade-in"></div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="container">
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-grid fade-in"></div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <h2 class="section-title" style="justify-content:center;">Get In Touch</h2>
-    <p class="contact-intro">Interested in research collaboration or PhD opportunities? Feel free to reach out.</p>
-    <div class="contact-links"></div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>© <span id="footer-year"></span> <span id="footer-name"></span> · Built with HTML &amp; ❤️</p>
-</footer>
-
+    const sectionLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          sectionLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+        }
+      });
+    }, { rootMargin: '-35% 0px -55% 0px' });
+    document.querySelectorAll('main section[id]').forEach(section => sectionObserver.observe(section));
+  </script>
 </body>
 </html>
