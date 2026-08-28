@@ -155,10 +155,13 @@ story.append(entry(
     ["Comparing static AED placement with a dynamic human-vehicle-drone coordinated scheme using road-network analysis; exploring sustainable operation through insurance partnership models."],
 ))
 story.append(entry(
-    "Meal Planning and Nutritional Optimization",
-    "Project Experience | Meal Optimization",
+    "Meal Optimization WeChat Mini Program",
+    "Project Developer | Personalized Meal Recommendation",
     "2026",
-    ["Formulated an optimization framework for meal planning and food allocation under nutritional, budget, and variety constraints. Explored linear and integer programming to balance daily nutrient targets with practical menu choices and analyze cost-nutrition-diversity trade-offs."],
+    [
+        "Developed a WeChat mini program for personalized meal recommendations from user profiles and dietary preferences, using Taro + React + TypeScript with Tencent Cloud Functions and an optimization solver. Supported meat/vegetable/staple structure configuration, taste matching, nutrition constraints, and set-meal recommendations.",
+        "Implemented upper/lower bounds for calories, protein, carbohydrates, and fats; hard-excluded disliked ingredients, dish-level replacement, infeasibility fallbacks, and carbohydrate-overage alerts with adjustment suggestions. Improved stability and UX through legacy solver compatibility, exception fallback, and frontend feedback.",
+    ],
 ))
 
 story.append(section("Selected Honors & Awards"))
