@@ -166,6 +166,7 @@ story.append(entry(
 
 story.append(section("Selected Honors & Awards"))
 story.append(bullets([
+    "<b>First Prize</b>, Guangdong-Hong Kong-Macao Greater Bay Area Industrial Engineering Innovation Competition - 2026",
     "<b>APRU ULP Outstanding Student Ambassador</b> (one of ten university-wide), APRU / SUSTech - 2026",
     "<b>Second Prize</b>, 17th National College Student Mathematics Competition (Non-Math A) - 2025",
     "<b>Outstanding Individual</b>, SUSTech Winter Social Practice - 2026",
@@ -190,7 +191,7 @@ story.append(entry(
     "Group Leader | Orange Light Volunteer Service Team",
     "Community research and accessibility advocacy",
     "2025 - Present",
-    ["Led community research across Shenzhen, Foshan, and Guangzhou; partnered with the Shenzhen Association for the Blind on accessibility supervision and hosted Oxford University delegations at SUSTech."],
+    ["Completed 160+ hours of volunteer service. Led community research across Shenzhen, Foshan, and Guangzhou; partnered with the Shenzhen Association for the Blind on accessibility supervision and hosted Oxford University delegations at SUSTech."],
 ))
 
 story.append(section("Skills"))
