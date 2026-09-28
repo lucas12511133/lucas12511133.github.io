@@ -7,7 +7,9 @@ from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import Image, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+from reportlab.platypus import (
+    Image, ListFlowable, ListItem, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -55,6 +57,9 @@ date_style = ParagraphStyle(
     "ChineseDate", parent=body, alignment=TA_RIGHT, fontSize=7.4,
     leading=9.2, textColor=MUTED,
 )
+project_body = ParagraphStyle(
+    "ChineseProjectPoint", parent=body, fontSize=7.8, leading=9.5,
+)
 
 
 def section(title):
@@ -80,13 +85,22 @@ def paragraphs(items):
     return table
 
 
-def entry(title, role, date, details=None):
+def project_points(items):
+    return ListFlowable(
+        [ListItem(Paragraph(item, project_body), leftIndent=0) for item in items],
+        bulletType="bullet", start="circle", bulletFontName="MicrosoftYaHei",
+        bulletFontSize=3.8, bulletColor=INK, leftIndent=10,
+        bulletOffsetY=1.2, spaceBefore=0, spaceAfter=1,
+    )
+
+
+def entry(title, role, date, details=None, project=False):
     rows = [
         [Paragraph(title, entry_title), Paragraph(date, date_style)],
         [Paragraph(role, entry_meta), ""],
     ]
     if details:
-        rows.append([paragraphs(details), ""])
+        rows.append([project_points(details) if project else paragraphs(details), ""])
     table = Table(rows, colWidths=[PAGE_W - 2.08 * inch, 1.22 * inch], hAlign="LEFT")
     commands = [
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
@@ -143,26 +157,29 @@ story.append(entry(
     "项目负责人 · 120急救站点选址优化",
     "2026 - 至今",
     [
-        "带领6人团队开展深圳市急救站点布局优化，将全市划分为5,279个500米×500米网格；基于62万余条急救调度记录及36万条腾讯地图样本构建XGBoost预计到达时间模型，MAE为1.64分钟、R²为0.863，实现10分钟覆盖率90%。",
-        "获第八届中国大学生机械工程创新创意大赛决赛入围（2026）。工具：Python、OSMnx、XGBoost。",
-    ],
+        "带领6人团队开展深圳市急救站点布局优化，将全市划分为5,279个500米×500米网格。",
+        "基于62万余条急救调度记录和36万条腾讯地图样本构建XGBoost预计到达时间模型，MAE为1.64分钟、R²为0.863，实现10分钟覆盖率90%。",
+        "入围第八届中国大学生机械工程创新创意大赛（2026）。工具：Python、OSMnx、XGBoost。",
+    ], project=True,
 ))
 story.append(entry(
     "古隆中景区 AED 布设优化",
     "项目参与者",
     "2026 - 至今",
     [
-        "基于道路网络分析，比较固定式AED布设与人、车、无人机协同的动态响应方案；并探索通过保险合作模式构建可持续运营机制。",
-    ],
+        "基于道路网络分析，比较固定式AED布设与人、车、无人机协同的动态响应方案。",
+        "探索通过保险合作等方式构建可持续运营机制。",
+    ], project=True,
 ))
 story.append(entry(
     "餐食优化微信小程序",
     "项目开发者 · 智能膳食推荐",
     "2026",
     [
-        "开发基于用户画像与饮食偏好的智能膳食推荐小程序。前端采用Taro + React + TypeScript，结合腾讯云云函数与优化求解器，实现荤素主食结构配置、口味偏好匹配、营养约束计算及套餐推荐。",
-        "完善热量、蛋白质、碳水和脂肪等指标的上下限控制，支持不喜欢食材硬排除、菜品逐道替换及无解场景备选方案；针对主食加入后的碳水超标，提供具体指标提示和饮食调整建议。通过兼容旧版求解器返回结果、异常降级和前端交互反馈，提升系统稳定性与用户体验。",
-    ],
+        "采用Taro + React + TypeScript构建前端，结合腾讯云云函数与优化求解器，根据用户画像和饮食偏好生成膳食套餐；支持荤素主食结构配置与口味匹配。",
+        "设置热量、蛋白质、碳水和脂肪上下限；支持不喜欢食材硬排除、菜品逐道替换及无解场景备选方案。",
+        "针对主食加入后碳水超标提供指标提示与饮食建议；兼容旧版求解器返回结果，并完善异常降级和交互反馈。",
+    ], project=True,
 ))
 
 story.append(section("领导力与志愿服务经历"))

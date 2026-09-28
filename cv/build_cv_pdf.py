@@ -63,6 +63,9 @@ date_style = ParagraphStyle(
     "Date", parent=body, alignment=TA_RIGHT, fontSize=7.7,
     leading=9.4, textColor=MUTED,
 )
+project_body = ParagraphStyle(
+    "ProjectPoint", parent=body, fontSize=7.6, leading=9.2,
+)
 
 
 def section(title):
@@ -84,11 +87,20 @@ def bullets(items, bullet_color=INK):
     )
 
 
-def entry(title, subtitle, date, details=None):
+def project_points(items):
+    return ListFlowable(
+        [ListItem(Paragraph(item, project_body), leftIndent=0) for item in items],
+        bulletType="bullet", start="circle", bulletFontName="Helvetica",
+        bulletFontSize=3.8, bulletColor=INK, leftIndent=10,
+        bulletOffsetY=1.2, spaceBefore=0, spaceAfter=1,
+    )
+
+
+def entry(title, subtitle, date, details=None, project=False):
     rows = [[Paragraph(title, entry_title), Paragraph(date, date_style)],
             [Paragraph(subtitle, entry_italic), ""]]
     if details:
-        rows.append([bullets(details), ""])
+        rows.append([project_points(details) if project else bullets(details), ""])
     table = Table(rows, colWidths=[PAGE_W - 2.08 * inch, 1.22 * inch], hAlign="LEFT")
     table.setStyle(TableStyle([
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
@@ -143,24 +155,29 @@ story.append(entry(
     "Project Lead | 120 EMS Station Location Optimization",
     "2026 - Present",
     [
-        "Leading a 6-member team to optimize emergency medical service station placement across Shenzhen. Partitioned the city into 5,279 500m x 500m grids and developed an XGBoost ETA model using 620K+ dispatch records and 360K Tencent Maps samples (MAE = 1.64 min, R2 = 0.863); achieved 90% coverage within 10 minutes.",
+        "Led a 6-member team in optimizing EMS station locations across Shenzhen; partitioned the city into 5,279 500m x 500m grids.",
+        "Built an XGBoost ETA model from 620K+ dispatch records and 360K Tencent Maps samples (MAE = 1.64 min, R2 = 0.863), achieving 90% coverage within 10 minutes.",
         "Finalist, 8th China University Mechanical Engineering Innovation & Creativity Competition (2026). Tools: Python, OSMnx, XGBoost.",
-    ],
+    ], project=True,
 ))
 story.append(entry(
     "AED Deployment at Gulongzhong",
     "Project Participant | AED Deployment at Gulongzhong",
     "2026 - Present",
-    ["Comparing static AED placement with a dynamic human-vehicle-drone coordinated scheme using road-network analysis; exploring sustainable operation through insurance partnership models."],
+    [
+        "Compared fixed AED placement with a dynamic human-vehicle-drone response scheme using road-network analysis.",
+        "Explored sustainable operating models, including potential insurance partnerships.",
+    ], project=True,
 ))
 story.append(entry(
     "Meal Optimization WeChat Mini Program",
     "Project Developer | Personalized Meal Recommendation",
     "2026",
     [
-        "Developed a WeChat mini program for personalized meal recommendations from user profiles and dietary preferences, using Taro + React + TypeScript with Tencent Cloud Functions and an optimization solver. Supported meat/vegetable/staple structure configuration, taste matching, nutrition constraints, and set-meal recommendations.",
-        "Implemented upper/lower bounds for calories, protein, carbohydrates, and fats; hard-excluded disliked ingredients, dish-level replacement, infeasibility fallbacks, and carbohydrate-overage alerts with adjustment suggestions. Improved stability and UX through legacy solver compatibility, exception fallback, and frontend feedback.",
-    ],
+        "Built a personalized meal recommendation mini program with Taro + React + TypeScript, Tencent Cloud Functions, and an optimization solver; supports meal composition, taste matching, nutrition constraints, and set-meal recommendations.",
+        "Implemented upper/lower bounds for calories, protein, carbohydrates, and fats, plus hard exclusion of disliked ingredients, dish-level replacement, and alternatives for infeasible plans.",
+        "Added carbohydrate-overage alerts and diet suggestions; improved reliability with legacy solver compatibility, exception fallbacks, and clearer frontend feedback.",
+    ], project=True,
 ))
 
 story.append(section("Leadership & Service Experience"))
