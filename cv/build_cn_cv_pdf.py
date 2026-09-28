@@ -121,12 +121,6 @@ header.setStyle(TableStyle([
 ]))
 story.extend([header, Spacer(1, 2)])
 
-story.append(section("研究方向与导师"))
-story.append(paragraphs([
-    "<b>研究方向：</b>运筹优化、应急响应与物流、机器学习与数据科学、数学建模。",
-    "<b>学术导师：</b>南方科技大学工业工程系王宇教授。",
-]))
-
 story.append(section("教育经历"))
 story.append(entry(
     "南方科技大学（SUSTech）",
@@ -137,6 +131,11 @@ story.append(entry(
         "<b>部分课程：</b>数学分析 I-II（93、96）、常微分方程 B（98）、概率论基础（94）、线性代数（89）、C语言程序设计（96）、大学物理 II（90）。",
     ],
 ))
+story.append(section("研究方向与导师"))
+story.append(paragraphs([
+    "<b>研究方向：</b>运筹优化、应急响应与物流、机器学习与数据科学、数学建模。",
+    "<b>学术导师：</b>南方科技大学工业工程系王宇教授。",
+]))
 
 story.append(section("研究与项目经历"))
 story.append(entry(
@@ -166,20 +165,7 @@ story.append(entry(
     ],
 ))
 
-story.append(section("荣誉与获奖"))
-story.append(paragraphs([
-    "<b>优秀学生一等奖学金</b>，南方科技大学（2026）",
-    "<b>一等奖</b>，粤港澳大湾区工业工程创新大赛（2026）",
-    "<b>优秀学生大使</b>，APRU ULP（全校十位之一，2026）",
-    "<b>二等奖</b>，第十七届全国大学生数学竞赛非数学A类（2025）",
-    "<b>优秀实践个人</b>，南方科技大学寒假社会实践（2026）",
-    "<b>先进个人</b>，2026年寒假母校行",
-    "<b>优秀营员</b>，致诚书院第四届先诚团（2025）",
-    "<b>社会效益奖</b>，“百千万工程”突击队，晨光志愿服务队（2025）",
-    "<b>年度优秀志愿服务组织</b>，晨光志愿服务队（2025）",
-]))
-
-story.append(section("领导力与志愿服务"))
+story.append(section("领导力与志愿服务经历"))
 story.append(entry(
     "核心学生负责人｜南科大 IE Hunt",
     "优化挑战策划与学生团队协作",
@@ -207,7 +193,20 @@ story.append(entry(
     ],
 ))
 
-story.append(section("技能"))
+story.append(section("荣誉与获奖"))
+story.append(paragraphs([
+    "<b>优秀学生一等奖学金</b>，南方科技大学（2026）",
+    "<b>一等奖</b>，粤港澳大湾区工业工程创新大赛（2026）",
+    "<b>优秀学生大使</b>，APRU ULP（全校十位之一，2026）",
+    "<b>二等奖</b>，第十七届全国大学生数学竞赛非数学A类（2025）",
+    "<b>优秀实践个人</b>，南方科技大学寒假社会实践（2026）",
+    "<b>先进个人</b>，2026年寒假母校行",
+    "<b>优秀营员</b>，致诚书院第四届先诚团（2025）",
+    "<b>社会效益奖</b>，“百千万工程”突击队，晨光志愿服务队（2025）",
+    "<b>年度优秀志愿服务组织</b>，晨光志愿服务队（2025）",
+]))
+
+story.append(section("技能与语言"))
 story.append(paragraphs([
     "<b>编程与技术：</b>Python、MATLAB、R、C、LaTeX、AnyLogic、XGBoost、scikit-learn、NumPy、Pandas、Matplotlib、OSMnx。",
     "<b>语言：</b>普通话（母语）、英语（熟练）、韩语（日常基础）。",

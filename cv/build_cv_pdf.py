@@ -122,12 +122,6 @@ header.setStyle(TableStyle([
 ]))
 story.extend([header, Spacer(1, 2)])
 
-story.append(section("Research Interests & Mentorship"))
-story.append(bullets([
-    "<b>Interests:</b> Operations Research & Optimization; Emergency Response & Logistics; Machine Learning & Data Science; Mathematical Modeling.",
-    "<b>Academic Mentor:</b> <b>Professor Yu Wang</b>, Department of Industrial Engineering, SUSTech.",
-]))
-
 story.append(section("Education"))
 story.append(entry(
     "Southern University of Science and Technology (SUSTech)",
@@ -138,7 +132,12 @@ story.append(entry(
         "<b>Selected Coursework:</b> Mathematical Analysis I-II (93, 96), Ordinary Differential Equations B (98), Foundation of Probability Theory (94), Linear Algebra (89), Introduction to C Programming (96), College Physics II (90).",
     ],
 ))
-story.append(section("Selected Research & Projects"))
+story.append(section("Research Interests & Mentorship"))
+story.append(bullets([
+    "<b>Interests:</b> Operations Research & Optimization; Emergency Response & Logistics; Machine Learning & Data Science; Mathematical Modeling.",
+    "<b>Academic Mentor:</b> <b>Professor Yu Wang</b>, Department of Industrial Engineering, SUSTech.",
+]))
+story.append(section("Research Experience & Projects"))
 story.append(entry(
     "EMS Station Location Optimization",
     "Project Lead | 120 EMS Station Location Optimization",
@@ -164,20 +163,7 @@ story.append(entry(
     ],
 ))
 
-story.append(section("Selected Honors & Awards"))
-story.append(bullets([
-    "<b>First-Class Outstanding Student Scholarship</b>, Southern University of Science and Technology (SUSTech) - 2026",
-    "<b>First Prize</b>, Guangdong-Hong Kong-Macao Greater Bay Area Industrial Engineering Innovation Competition - 2026",
-    "<b>APRU ULP Outstanding Student Ambassador</b> (one of ten university-wide), APRU / SUSTech - 2026",
-    "<b>Second Prize</b>, 17th National College Student Mathematics Competition (Non-Math A) - 2025",
-    "<b>Outstanding Individual</b>, SUSTech Winter Social Practice - 2026",
-    "<b>Outstanding Individual</b>, Winter Visit to Alma Mater Program - 2026",
-    "<b>Outstanding Camper</b>, 4th Xiancheng Program, Zhicheng College - 2025",
-    "<b>Social Impact Award</b>, Hundreds, Thousands, Myriads Project, Chengguang Volunteer Team - 2025",
-    "<b>Outstanding Volunteer Service Organization of 2025</b>, Chengguang Volunteer Team - 2025",
-]))
-
-story.append(section("Leadership & Service"))
+story.append(section("Leadership & Service Experience"))
 story.append(entry(
     "Core Student Leader | SUSTech IE Hunt",
     "Optimization challenge planning and student team coordination",
@@ -201,7 +187,20 @@ story.append(entry(
     ["Completed 160+ hours of volunteer service. Led community research across Shenzhen, Foshan, and Guangzhou; partnered with the Shenzhen Association for the Blind on accessibility supervision and hosted Oxford University delegations at SUSTech."],
 ))
 
-story.append(section("Skills"))
+story.append(section("Selected Honors & Awards"))
+story.append(bullets([
+    "<b>First-Class Outstanding Student Scholarship</b>, Southern University of Science and Technology (SUSTech) - 2026",
+    "<b>First Prize</b>, Guangdong-Hong Kong-Macao Greater Bay Area Industrial Engineering Innovation Competition - 2026",
+    "<b>APRU ULP Outstanding Student Ambassador</b> (one of ten university-wide), APRU / SUSTech - 2026",
+    "<b>Second Prize</b>, 17th National College Student Mathematics Competition (Non-Math A) - 2025",
+    "<b>Outstanding Individual</b>, SUSTech Winter Social Practice - 2026",
+    "<b>Outstanding Individual</b>, Winter Visit to Alma Mater Program - 2026",
+    "<b>Outstanding Camper</b>, 4th Xiancheng Program, Zhicheng College - 2025",
+    "<b>Social Impact Award</b>, Hundreds, Thousands, Myriads Project, Chengguang Volunteer Team - 2025",
+    "<b>Outstanding Volunteer Service Organization of 2025</b>, Chengguang Volunteer Team - 2025",
+]))
+
+story.append(section("Skills & Languages"))
 story.append(bullets([
     "<b>Programming & Technical:</b> Python, MATLAB, R, C, LaTeX, AnyLogic, XGBoost, scikit-learn, NumPy, Pandas, Matplotlib, OSMnx.",
     "<b>Languages:</b> Mandarin (Native), English (Proficient), Korean (Daily basics).",
