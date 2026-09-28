@@ -30,38 +30,38 @@ HAIRLINE = colors.HexColor("#B9BDC2")
 
 styles = getSampleStyleSheet()
 body = ParagraphStyle(
-    "Body", parent=styles["Normal"], fontName="Helvetica", fontSize=7.45,
-    leading=9.15, textColor=INK, spaceAfter=0,
+    "Body", parent=styles["Normal"], fontName="Helvetica", fontSize=8.05,
+    leading=10.15, textColor=INK, spaceAfter=0,
 )
 body_muted = ParagraphStyle(
     "BodyMuted", parent=body, textColor=MUTED,
 )
 small = ParagraphStyle(
-    "Small", parent=body, fontSize=6.7, leading=8.1, textColor=MUTED,
+    "Small", parent=body, fontSize=7.1, leading=8.7, textColor=MUTED,
 )
 header_name = ParagraphStyle(
-    "HeaderName", parent=body, fontName="Helvetica-Bold", fontSize=19,
-    leading=21, textColor=INK, spaceAfter=3,
+    "HeaderName", parent=body, fontName="Helvetica-Bold", fontSize=20,
+    leading=22, textColor=INK, spaceAfter=4,
 )
 header_meta = ParagraphStyle(
-    "HeaderMeta", parent=body, fontName="Helvetica-Bold", fontSize=8.2,
-    leading=10, textColor=INK, spaceAfter=3,
+    "HeaderMeta", parent=body, fontName="Helvetica-Bold", fontSize=8.7,
+    leading=10.8, textColor=INK, spaceAfter=4,
 )
 section_style = ParagraphStyle(
-    "Section", parent=body, fontName="Helvetica-Bold", fontSize=9.3,
-    leading=11, textColor=INK, spaceBefore=0, spaceAfter=0,
+    "Section", parent=body, fontName="Helvetica-Bold", fontSize=10,
+    leading=12, textColor=INK, spaceBefore=0, spaceAfter=0,
 )
 entry_title = ParagraphStyle(
-    "EntryTitle", parent=body, fontName="Helvetica-Bold", fontSize=8.05,
-    leading=9.6, textColor=INK,
+    "EntryTitle", parent=body, fontName="Helvetica-Bold", fontSize=8.65,
+    leading=10.3, textColor=INK,
 )
 entry_italic = ParagraphStyle(
-    "EntryItalic", parent=body, fontName="Helvetica-Oblique", fontSize=7.45,
-    leading=9.0, textColor=INK,
+    "EntryItalic", parent=body, fontName="Helvetica-Oblique", fontSize=8.0,
+    leading=9.8, textColor=INK,
 )
 date_style = ParagraphStyle(
-    "Date", parent=body, alignment=TA_RIGHT, fontSize=7.2,
-    leading=8.8, textColor=MUTED,
+    "Date", parent=body, alignment=TA_RIGHT, fontSize=7.7,
+    leading=9.4, textColor=MUTED,
 )
 
 
@@ -69,8 +69,8 @@ def section(title):
     table = Table([[Paragraph(title.upper(), section_style)]], colWidths=[PAGE_W - 0.86 * inch])
     table.setStyle(TableStyle([
         ("LINEBELOW", (0, 0), (-1, -1), 0.55, INK),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 2.2),
-        ("TOPPADDING", (0, 0), (-1, -1), 3.5),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 4.2),
+        ("TOPPADDING", (0, 0), (-1, -1), 6.0),
     ]))
     return table
 
@@ -80,7 +80,7 @@ def bullets(items, bullet_color=COBALT):
         [ListItem(Paragraph(item, body), leftIndent=0) for item in items],
         bulletType="bullet", start="circle", bulletFontName="Helvetica",
         bulletFontSize=5.4, bulletColor=bullet_color, leftIndent=11,
-        bulletOffsetY=1.2, spaceBefore=1, spaceAfter=1,
+        bulletOffsetY=1.2, spaceBefore=2, spaceAfter=2,
     )
 
 
@@ -97,7 +97,7 @@ def entry(title, subtitle, date, details=None):
         ("LEFTPADDING", (0, 0), (-1, -1), 0),
         ("RIGHTPADDING", (0, 0), (-1, -1), 0),
         ("TOPPADDING", (0, 0), (-1, -1), 0),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 1.0),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 2.1),
     ]))
     return table
 
@@ -207,7 +207,7 @@ story.append(bullets([
 
 doc = SimpleDocTemplate(
     str(OUT), pagesize=A4, rightMargin=0.43 * inch, leftMargin=0.43 * inch,
-    topMargin=0.34 * inch, bottomMargin=0.32 * inch,
+    topMargin=0.46 * inch, bottomMargin=0.46 * inch,
     title="Sheng Lu (Lucas Lu) - Curriculum Vitae",
     author="Sheng Lu",
 )
