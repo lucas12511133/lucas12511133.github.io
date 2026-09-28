@@ -188,6 +188,11 @@ story.append(entry(
     "Oct. 2025",
 ))
 story.append(entry(
+    "Volunteer | APEC Shenzhen 2026",
+    "Volunteer Service",
+    "2026",
+))
+story.append(entry(
     "Group Leader | Orange Light Volunteer Service Team",
     "Community research and accessibility advocacy",
     "2025 - Present",
