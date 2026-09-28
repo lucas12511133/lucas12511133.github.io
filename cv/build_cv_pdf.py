@@ -69,8 +69,8 @@ def section(title):
     table = Table([[Paragraph(title.upper(), section_style)]], colWidths=[PAGE_W - 0.86 * inch])
     table.setStyle(TableStyle([
         ("LINEBELOW", (0, 0), (-1, -1), 0.55, INK),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 4.2),
-        ("TOPPADDING", (0, 0), (-1, -1), 6.0),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 3.6),
+        ("TOPPADDING", (0, 0), (-1, -1), 5.2),
     ]))
     return table
 
@@ -97,7 +97,7 @@ def entry(title, subtitle, date, details=None):
         ("LEFTPADDING", (0, 0), (-1, -1), 0),
         ("RIGHTPADDING", (0, 0), (-1, -1), 0),
         ("TOPPADDING", (0, 0), (-1, -1), 0),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 2.1),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 1.6),
     ]))
     return table
 
@@ -166,10 +166,12 @@ story.append(entry(
 
 story.append(section("Selected Honors & Awards"))
 story.append(bullets([
+    "<b>First-Class Outstanding Student Scholarship</b>, Southern University of Science and Technology (SUSTech) - 2026",
     "<b>First Prize</b>, Guangdong-Hong Kong-Macao Greater Bay Area Industrial Engineering Innovation Competition - 2026",
     "<b>APRU ULP Outstanding Student Ambassador</b> (one of ten university-wide), APRU / SUSTech - 2026",
     "<b>Second Prize</b>, 17th National College Student Mathematics Competition (Non-Math A) - 2025",
     "<b>Outstanding Individual</b>, SUSTech Winter Social Practice - 2026",
+    "<b>Outstanding Individual</b>, Winter Visit to Alma Mater Program - 2026",
     "<b>Outstanding Camper</b>, 4th Xiancheng Program, Zhicheng College - 2025",
     "<b>Social Impact Award</b>, Hundreds, Thousands, Myriads Project, Chengguang Volunteer Team - 2025",
     "<b>Outstanding Volunteer Service Organization of 2025</b>, Chengguang Volunteer Team - 2025",
