@@ -1,0 +1,221 @@
+from pathlib import Path
+
+from reportlab.lib import colors
+from reportlab.lib.enums import TA_RIGHT
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib.units import inch
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.platypus import Image, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "output" / "pdf" / "lu-sheng-cv-zh.pdf"
+OUT.parent.mkdir(parents=True, exist_ok=True)
+
+FONT_DIR = Path(r"C:\Windows\Fonts")
+pdfmetrics.registerFont(TTFont("MicrosoftYaHei", str(FONT_DIR / "msyh.ttc"), subfontIndex=0))
+pdfmetrics.registerFont(TTFont("MicrosoftYaHei-Bold", str(FONT_DIR / "msyhbd.ttc"), subfontIndex=0))
+pdfmetrics.registerFontFamily(
+    "MicrosoftYaHei", normal="MicrosoftYaHei", bold="MicrosoftYaHei-Bold",
+    italic="MicrosoftYaHei", boldItalic="MicrosoftYaHei-Bold",
+)
+
+PAGE_W, _ = A4
+INK = colors.HexColor("#15191C")
+COBALT = colors.HexColor("#2349D8")
+MUTED = colors.HexColor("#5F6366")
+
+styles = getSampleStyleSheet()
+body = ParagraphStyle(
+    "ChineseBody", parent=styles["Normal"], fontName="MicrosoftYaHei",
+    fontSize=8.0, leading=10.2, textColor=INK, spaceAfter=0,
+)
+header_name = ParagraphStyle(
+    "ChineseHeaderName", parent=body, fontName="MicrosoftYaHei-Bold",
+    fontSize=21, leading=24, spaceAfter=3,
+)
+header_meta = ParagraphStyle(
+    "ChineseHeaderMeta", parent=body, fontName="MicrosoftYaHei-Bold",
+    fontSize=8.3, leading=10.6, spaceAfter=3,
+)
+section_style = ParagraphStyle(
+    "ChineseSection", parent=body, fontName="MicrosoftYaHei-Bold",
+    fontSize=9.7, leading=12, spaceBefore=0, spaceAfter=0,
+)
+entry_title = ParagraphStyle(
+    "ChineseEntryTitle", parent=body, fontName="MicrosoftYaHei-Bold",
+    fontSize=8.5, leading=10.4,
+)
+entry_meta = ParagraphStyle(
+    "ChineseEntryMeta", parent=body, fontSize=7.8, leading=9.8,
+)
+date_style = ParagraphStyle(
+    "ChineseDate", parent=body, alignment=TA_RIGHT, fontSize=7.4,
+    leading=9.2, textColor=MUTED,
+)
+
+
+def section(title):
+    table = Table([[Paragraph(title, section_style)]], colWidths=[PAGE_W - 0.86 * inch])
+    table.setStyle(TableStyle([
+        ("LINEBELOW", (0, 0), (-1, -1), 0.55, INK),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 3.8),
+        ("TOPPADDING", (0, 0), (-1, -1), 5.5),
+    ]))
+    return table
+
+
+def paragraphs(items):
+    rows = [[Paragraph(item, body)] for item in items]
+    table = Table(rows, colWidths=[PAGE_W - 0.86 * inch])
+    table.setStyle(TableStyle([
+        ("LEFTPADDING", (0, 0), (-1, -1), 0),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+        ("TOPPADDING", (0, 0), (-1, -1), 1),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 1),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+    ]))
+    return table
+
+
+def entry(title, role, date, details=None):
+    rows = [
+        [Paragraph(title, entry_title), Paragraph(date, date_style)],
+        [Paragraph(role, entry_meta), ""],
+    ]
+    if details:
+        rows.append([paragraphs(details), ""])
+    table = Table(rows, colWidths=[PAGE_W - 2.08 * inch, 1.22 * inch], hAlign="LEFT")
+    commands = [
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("SPAN", (0, 1), (1, 1)),
+        ("LEFTPADDING", (0, 0), (-1, -1), 0),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+        ("TOPPADDING", (0, 0), (-1, -1), 0),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 2),
+    ]
+    if details:
+        commands.append(("SPAN", (0, 2), (1, 2)))
+    table.setStyle(TableStyle(commands))
+    return table
+
+
+story = []
+header_text = [
+    Paragraph("卢胜", header_name),
+    Paragraph("南方科技大学 · 工业工程专业本科生 · 2029届", header_meta),
+    Paragraph("邮箱：<link href='mailto:12511133@mail.sustech.edu.cn' color='#2349D8'>12511133@mail.sustech.edu.cn</link>  |  电话：(+86) 157-2864-3180", body),
+    Paragraph("主页：<link href='https://lucas12511133.github.io' color='#2349D8'>lucas12511133.github.io</link>  |  深圳，中国", body),
+]
+photo = Image(str(ROOT / "cv" / "photo.png"), width=0.82 * inch, height=1.09 * inch)
+header = Table([[header_text, photo]], colWidths=[5.85 * inch, 0.9 * inch])
+header.setStyle(TableStyle([
+    ("VALIGN", (0, 0), (-1, -1), "TOP"),
+    ("ALIGN", (1, 0), (1, 0), "RIGHT"),
+    ("LEFTPADDING", (0, 0), (-1, -1), 0),
+    ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+    ("TOPPADDING", (0, 0), (-1, -1), 0),
+    ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
+]))
+story.extend([header, Spacer(1, 2)])
+
+story.append(section("研究方向与导师"))
+story.append(paragraphs([
+    "<b>研究方向：</b>运筹优化、应急响应与物流、机器学习与数据科学、数学建模。",
+    "<b>学术导师：</b>南方科技大学工业工程系王宇教授。",
+]))
+
+story.append(section("教育经历"))
+story.append(entry(
+    "南方科技大学（SUSTech）",
+    "工学学士在读 · 工业工程专业 · 致诚书院 · 深圳",
+    "2025.08 - 至今",
+    [
+        "<b>GPA：3.91 / 4.0</b>　|　<b>排名：1 / 11</b>。",
+        "<b>部分课程：</b>数学分析 I-II（93、96）、常微分方程 B（98）、概率论基础（94）、线性代数（89）、C语言程序设计（96）、大学物理 II（90）。",
+    ],
+))
+
+story.append(section("研究与项目经历"))
+story.append(entry(
+    "深圳市急救站点选址优化",
+    "项目负责人 · 120急救站点选址优化",
+    "2026 - 至今",
+    [
+        "带领6人团队开展深圳市急救站点布局优化，将全市划分为5,279个500米×500米网格；基于62万余条急救调度记录及36万条腾讯地图样本构建XGBoost预计到达时间模型，MAE为1.64分钟、R²为0.863，实现10分钟覆盖率90%。",
+        "获第八届中国大学生机械工程创新创意大赛决赛入围（2026）。工具：Python、OSMnx、XGBoost。",
+    ],
+))
+story.append(entry(
+    "古隆中景区 AED 布设优化",
+    "项目参与者",
+    "2026 - 至今",
+    [
+        "基于道路网络分析，比较固定式AED布设与人、车、无人机协同的动态响应方案；并探索通过保险合作模式构建可持续运营机制。",
+    ],
+))
+story.append(entry(
+    "餐食优化微信小程序",
+    "项目开发者 · 智能膳食推荐",
+    "2026",
+    [
+        "开发基于用户画像与饮食偏好的智能膳食推荐小程序。前端采用Taro + React + TypeScript，结合腾讯云云函数与优化求解器，实现荤素主食结构配置、口味偏好匹配、营养约束计算及套餐推荐。",
+        "完善热量、蛋白质、碳水和脂肪等指标的上下限控制，支持不喜欢食材硬排除、菜品逐道替换及无解场景备选方案；针对主食加入后的碳水超标，提供具体指标提示和饮食调整建议。通过兼容旧版求解器返回结果、异常降级和前端交互反馈，提升系统稳定性与用户体验。",
+    ],
+))
+
+story.append(section("荣誉与获奖"))
+story.append(paragraphs([
+    "<b>一等奖</b>，粤港澳大湾区工业工程创新大赛（2026）",
+    "<b>优秀学生大使</b>，APRU ULP（全校十位之一，2026）",
+    "<b>二等奖</b>，第十七届全国大学生数学竞赛非数学A类（2025）",
+    "<b>优秀实践个人</b>，南方科技大学寒假社会实践（2026）",
+    "<b>优秀营员</b>，致诚书院第四届先诚团（2025）",
+    "<b>社会效益奖</b>，“百千万工程”突击队，晨光志愿服务队（2025）",
+    "<b>年度优秀志愿服务组织</b>，晨光志愿服务队（2025）",
+]))
+
+story.append(section("领导力与志愿服务"))
+story.append(entry(
+    "核心学生负责人｜南科大 IE Hunt",
+    "优化挑战策划与学生团队协作",
+    "2025.10 - 至今",
+    [
+        "共同策划第1、2季校园优化挑战赛，将旅行商问题与线性规划融入游戏机制；协调5人团队负责物流、可行性分析与宣传。",
+    ],
+))
+story.append(entry(
+    "致诚书院十周年庆典学生代表",
+    "作为唯一新生代表发表主题演讲",
+    "2025.10",
+))
+story.append(entry(
+    "志愿者｜APEC Shenzhen 2026",
+    "APEC深圳2026志愿服务",
+    "2026",
+))
+story.append(entry(
+    "组长｜晨光志愿服务队",
+    "社区调研与无障碍倡导 · 志愿服务累计160+小时",
+    "2025 - 至今",
+    [
+        "在深圳、佛山、广州开展社区调研；与深圳市盲人协会合作开展无障碍监督，并在南科大接待牛津大学代表团。",
+    ],
+))
+
+story.append(section("技能"))
+story.append(paragraphs([
+    "<b>编程与技术：</b>Python、MATLAB、R、C、LaTeX、AnyLogic、XGBoost、scikit-learn、NumPy、Pandas、Matplotlib、OSMnx。",
+    "<b>语言：</b>普通话（母语）、英语（熟练）、韩语（日常基础）。",
+]))
+
+doc = SimpleDocTemplate(
+    str(OUT), pagesize=A4, rightMargin=0.43 * inch, leftMargin=0.43 * inch,
+    topMargin=0.46 * inch, bottomMargin=0.46 * inch,
+    title="卢胜 - 个人简历",
+    author="卢胜",
+)
+doc.build(story)
+print(OUT)

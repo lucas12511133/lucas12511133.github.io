@@ -105,7 +105,7 @@ def entry(title, subtitle, date, details=None):
 story = []
 
 header_text = [
-    Paragraph("Sheng Lu (Lucas Lu)", header_name),
+    Paragraph("Lucas Lu", header_name),
     Paragraph("B.Eng. Candidate in Industrial Engineering | Class of 2029", header_meta),
     Paragraph("Email: <link href='mailto:12511133@mail.sustech.edu.cn' color='#2349D8'>12511133@mail.sustech.edu.cn</link> | Phone: (+86) 157-2864-3180", body),
     Paragraph("Website: <link href='https://lucas12511133.github.io' color='#2349D8'>lucas12511133.github.io</link> | Location: Zhicheng College, SUSTech, Shenzhen, China", body),
@@ -208,7 +208,7 @@ story.append(bullets([
 doc = SimpleDocTemplate(
     str(OUT), pagesize=A4, rightMargin=0.43 * inch, leftMargin=0.43 * inch,
     topMargin=0.46 * inch, bottomMargin=0.46 * inch,
-    title="Sheng Lu (Lucas Lu) - Curriculum Vitae",
+    title="Lucas Lu - Curriculum Vitae",
     author="Sheng Lu",
 )
 doc.build(story)
