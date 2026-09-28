@@ -75,12 +75,12 @@ def section(title):
     return table
 
 
-def bullets(items, bullet_color=COBALT):
+def bullets(items, bullet_color=INK):
     return ListFlowable(
         [ListItem(Paragraph(item, body), leftIndent=0) for item in items],
         bulletType="bullet", start="circle", bulletFontName="Helvetica",
-        bulletFontSize=5.4, bulletColor=bullet_color, leftIndent=11,
-        bulletOffsetY=1.2, spaceBefore=2, spaceAfter=2,
+        bulletFontSize=0, bulletColor=bullet_color, leftIndent=0,
+        bulletOffsetY=0, spaceBefore=2, spaceAfter=2,
     )
 
 
