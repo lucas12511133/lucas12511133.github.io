@@ -1,14 +1,14 @@
 from pathlib import Path
 
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_RIGHT
+from reportlab.lib.enums import TA_CENTER, TA_RIGHT
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (
-    Image, ListFlowable, ListItem, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle,
+    Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle,
 )
 
 
@@ -32,83 +32,91 @@ MUTED = colors.HexColor("#5F6366")
 styles = getSampleStyleSheet()
 body = ParagraphStyle(
     "ChineseBody", parent=styles["Normal"], fontName="MicrosoftYaHei",
-    fontSize=8.0, leading=10.2, textColor=INK, spaceAfter=0,
+    fontSize=8.8, leading=11.1, textColor=INK, spaceAfter=0,
 )
 header_name = ParagraphStyle(
     "ChineseHeaderName", parent=body, fontName="MicrosoftYaHei-Bold",
-    fontSize=21, leading=24, spaceAfter=3,
+    fontSize=22, leading=25, alignment=TA_CENTER, spaceAfter=2,
 )
 header_meta = ParagraphStyle(
-    "ChineseHeaderMeta", parent=body, fontName="MicrosoftYaHei-Bold",
-    fontSize=8.3, leading=10.6, spaceAfter=3,
+    "ChineseHeaderMeta", parent=body, fontName="MicrosoftYaHei",
+    fontSize=8.6, leading=10.5, alignment=TA_CENTER, spaceAfter=1,
 )
 section_style = ParagraphStyle(
     "ChineseSection", parent=body, fontName="MicrosoftYaHei-Bold",
-    fontSize=9.7, leading=12, spaceBefore=0, spaceAfter=0,
+    fontSize=9.8, leading=12, spaceBefore=0, spaceAfter=0,
 )
 entry_title = ParagraphStyle(
     "ChineseEntryTitle", parent=body, fontName="MicrosoftYaHei-Bold",
-    fontSize=8.5, leading=10.4,
+    fontSize=8.8, leading=10.8,
 )
 entry_meta = ParagraphStyle(
-    "ChineseEntryMeta", parent=body, fontSize=7.8, leading=9.8,
+    "ChineseEntryMeta", parent=body, fontSize=8.2, leading=10,
 )
 date_style = ParagraphStyle(
-    "ChineseDate", parent=body, alignment=TA_RIGHT, fontSize=7.4,
-    leading=9.2, textColor=MUTED,
+    "ChineseDate", parent=body, alignment=TA_RIGHT, fontSize=8.1,
+    leading=9.8, textColor=INK,
+)
+location_style = ParagraphStyle(
+    "ChineseLocation", parent=entry_meta, alignment=TA_RIGHT, textColor=INK,
 )
 project_body = ParagraphStyle(
-    "ChineseProjectPoint", parent=body, fontSize=7.8, leading=9.5,
+    "ChineseProjectPoint", parent=body, fontSize=8.7, leading=10.7,
+)
+bullet_style = ParagraphStyle(
+    "ChineseBullet", parent=body, fontSize=9, leading=10.5,
 )
 
 
 def section(title):
-    table = Table([[Paragraph(title, section_style)]], colWidths=[PAGE_W - 0.86 * inch])
+    table = Table([[Paragraph(title.upper(), section_style)]], colWidths=[PAGE_W - 0.96 * inch])
     table.setStyle(TableStyle([
-        ("LINEBELOW", (0, 0), (-1, -1), 0.55, INK),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 3.8),
-        ("TOPPADDING", (0, 0), (-1, -1), 5.5),
+        ("LINEBELOW", (0, 0), (-1, -1), 0.45, INK),
+        ("LEFTPADDING", (0, 0), (-1, -1), 0),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 4.5),
+        ("TOPPADDING", (0, 0), (-1, -1), 6),
     ]))
     return table
 
 
 def paragraphs(items):
-    rows = [[Paragraph(item, body)] for item in items]
-    table = Table(rows, colWidths=[PAGE_W - 0.86 * inch])
+    return bullet_table(items, body)
+
+
+def bullet_table(items, paragraph_style):
+    rows = [[Paragraph("•", bullet_style), Paragraph(item, paragraph_style)] for item in items]
+    table = Table(rows, colWidths=[0.18 * inch, PAGE_W - 0.96 * inch - 0.18 * inch])
     table.setStyle(TableStyle([
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
         ("LEFTPADDING", (0, 0), (-1, -1), 0),
         ("RIGHTPADDING", (0, 0), (-1, -1), 0),
-        ("TOPPADDING", (0, 0), (-1, -1), 1),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 1),
+        ("TOPPADDING", (0, 0), (-1, -1), 0.5),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 1.2),
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
     ]))
     return table
 
 
 def project_points(items):
-    return ListFlowable(
-        [ListItem(Paragraph(item, project_body), leftIndent=0) for item in items],
-        bulletType="bullet", start="circle", bulletFontName="MicrosoftYaHei",
-        bulletFontSize=3.8, bulletColor=INK, leftIndent=10,
-        bulletOffsetY=1.2, spaceBefore=0, spaceAfter=1,
-    )
+    return bullet_table(items, project_body)
 
 
-def entry(title, role, date, details=None, project=False):
+def entry(title, role, date, details=None, project=False, location=None):
     rows = [
         [Paragraph(title, entry_title), Paragraph(date, date_style)],
-        [Paragraph(role, entry_meta), ""],
+        [Paragraph(role, entry_meta), Paragraph(location, location_style) if location else ""],
     ]
     if details:
         rows.append([project_points(details) if project else paragraphs(details), ""])
-    table = Table(rows, colWidths=[PAGE_W - 2.08 * inch, 1.22 * inch], hAlign="LEFT")
+    table = Table(rows, colWidths=[PAGE_W - 2.18 * inch, 1.22 * inch], hAlign="LEFT")
     commands = [
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
-        ("SPAN", (0, 1), (1, 1)),
+        ("SPAN", (0, 1), (1, 1)) if not location else ("RIGHTPADDING", (0, 1), (1, 1), 0),
         ("LEFTPADDING", (0, 0), (-1, -1), 0),
         ("RIGHTPADDING", (0, 0), (-1, -1), 0),
         ("TOPPADDING", (0, 0), (-1, -1), 0),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 2),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 3.5),
     ]
     if details:
         commands.append(("SPAN", (0, 2), (1, 2)))
@@ -120,38 +128,27 @@ story = []
 header_text = [
     Paragraph("卢胜", header_name),
     Paragraph("南方科技大学 · 工业工程专业本科生 · 2029届", header_meta),
-    Paragraph("邮箱：<link href='mailto:12511133@mail.sustech.edu.cn' color='#2349D8'>12511133@mail.sustech.edu.cn</link>  |  电话：(+86) 157-2864-3180", body),
-    Paragraph("主页：<link href='https://lucas12511133.github.io' color='#2349D8'>lucas12511133.github.io</link>  |  深圳，中国", body),
+    Paragraph("<link href='mailto:12511133@mail.sustech.edu.cn' color='#2349D8'>12511133@mail.sustech.edu.cn</link>　|　(+86) 157-2864-3180", header_meta),
+    Paragraph("<link href='https://lucas12511133.github.io' color='#2349D8'>lucas12511133.github.io</link>　|　深圳，中国", header_meta),
 ]
-photo = Image(str(ROOT / "cv" / "photo.png"), width=0.82 * inch, height=1.09 * inch)
-header = Table([[header_text, photo]], colWidths=[5.85 * inch, 0.9 * inch])
-header.setStyle(TableStyle([
-    ("VALIGN", (0, 0), (-1, -1), "TOP"),
-    ("ALIGN", (1, 0), (1, 0), "RIGHT"),
-    ("LEFTPADDING", (0, 0), (-1, -1), 0),
-    ("RIGHTPADDING", (0, 0), (-1, -1), 0),
-    ("TOPPADDING", (0, 0), (-1, -1), 0),
-    ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
-]))
-story.extend([header, Spacer(1, 2)])
+for paragraph in header_text:
+    story.append(paragraph)
+story.append(Spacer(1, 5))
 
 story.append(section("教育经历"))
 story.append(entry(
     "南方科技大学（SUSTech）",
-    "工学学士在读 · 工业工程专业 · 致诚书院 · 深圳",
+    "工学学士在读 · 工业工程专业 · 致诚书院",
     "2025.08 - 至今",
     [
         "<b>GPA：3.91 / 4.0</b>　|　<b>排名：1 / 11</b>。",
         "<b>部分课程：</b>数学分析 I-II（93、96）、常微分方程 B（98）、概率论基础（94）、线性代数（89）、C语言程序设计（96）、大学物理 II（90）。",
-    ],
+    ], location="深圳，中国",
 ))
-story.append(section("研究方向与导师"))
-story.append(paragraphs([
-    "<b>研究方向：</b>运筹优化、应急响应与物流、机器学习与数据科学、数学建模。",
-    "<b>学术导师：</b>南方科技大学工业工程系王宇教授。",
-]))
+story.append(section("研究兴趣"))
+story.append(Paragraph("运筹优化、应急响应与物流、机器学习与数据科学、数学建模。", body))
 
-story.append(section("研究与项目经历"))
+story.append(section("研究经历"))
 story.append(entry(
     "深圳市急救站点选址优化",
     "项目负责人 · 120急救站点选址优化",
@@ -212,20 +209,14 @@ story.append(entry(
 
 story.append(section("荣誉与获奖"))
 story.append(paragraphs([
-    "<b>优秀学生一等奖学金</b>，南方科技大学（2026）",
-    "<b>一等奖</b>，粤港澳大湾区工业工程创新大赛（2026）",
-    "<b>优秀学生大使</b>，APRU ULP（全校十位之一，2026）",
-    "<b>二等奖</b>，第十七届全国大学生数学竞赛非数学A类（2025）",
-    "<b>优秀实践个人</b>，南方科技大学寒假社会实践（2026）",
-    "<b>先进个人</b>，2026年寒假母校行",
-    "<b>优秀营员</b>，致诚书院第四届先诚团（2025）",
-    "<b>社会效益奖</b>，“百千万工程”突击队，晨光志愿服务队（2025）",
-    "<b>年度优秀志愿服务组织</b>，晨光志愿服务队（2025）",
+    "<b>奖学金：</b>南方科技大学优秀学生一等奖学金（2026）。",
+    "<b>竞赛：</b>粤港澳大湾区工业工程创新大赛一等奖（2026）；第十七届全国大学生数学竞赛非数学A类二等奖（2025）。",
+    "<b>荣誉：</b>APRU ULP优秀学生大使（全校十位之一，2026）；南科大寒假社会实践优秀实践个人、寒假母校行先进个人（2026）；致诚书院第四届先诚团优秀营员（2025）；晨光志愿服务队“百千万工程”社会效益奖及年度优秀志愿服务组织（2025）。",
 ]))
 
-story.append(section("技能与语言"))
+story.append(section("技能与兴趣"))
 story.append(paragraphs([
-    "<b>编程与技术：</b>Python、MATLAB、R、C、LaTeX、AnyLogic、XGBoost、scikit-learn、NumPy、Pandas、Matplotlib、OSMnx。",
+    "<b>编程与技术：</b>Python、MATLAB、R、C、LaTeX、AnyLogic、XGBoost、scikit-learn、NumPy、Pandas、Matplotlib、OSMnx",
     "<b>语言：</b>普通话（母语）、英语（熟练）、韩语（日常基础）。",
 ]))
 
