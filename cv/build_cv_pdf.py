@@ -156,7 +156,7 @@ story.append(entry(
     "B.Eng. in Industrial Engineering, Zhicheng College",
     "Aug. 2025 - Present",
     [
-        "<b>GPA: 3.91 / 4.0</b> | <b>Ranking: 1 / 11</b>.",
+        "<b>GPA: 3.91 / 4.0</b> | <b>Major Ranking: 1 / 11</b> | <b>Comprehensive Assessment Ranking: 3 / 244</b>.",
         "<b>Selected Coursework:</b> Mathematical Analysis I-II (93, 96), Ordinary Differential Equations B (98), Foundation of Probability Theory (94), Linear Algebra (89), Introduction to C Programming (96), College Physics II (90).",
     ], location="Shenzhen, China",
 ))
