@@ -219,9 +219,9 @@ story.append(entry(
 
 story.append(section("Selected Honors & Awards"))
 story.append(bullets([
-    "<b>Scholarships:</b> First-Class Outstanding Student Scholarship, SUSTech (2026).",
-    "<b>Competitions:</b> First Prize, Greater Bay Area Industrial Engineering Innovation Competition (2026); Second Prize, National College Student Mathematics Competition (Non-Math A, 2025).",
-    "<b>Honors:</b> APRU ULP Outstanding Student Ambassador (one of ten university-wide, 2026); Outstanding Individual, SUSTech Winter Social Practice and Winter Visit to Alma Mater (2026); Outstanding Camper, 4th Xiancheng Program (2025); Social Impact Award and Outstanding Volunteer Service Organization, Chengguang Volunteer Team (2025).",
+    "<b>Scholarships:</b> First-Class Outstanding Student Scholarship, SUSTech (top 5% university-wide, 2026).",
+    "<b>Competitions:</b> First Prize, Greater Bay Area Industrial Engineering Innovation Competition (ranked 2nd of 54, 2026); Second Prize, National College Student Mathematics Competition (Non-Math A, top 15% nationally, 2025).",
+    "<b>Honors:</b> APRU ULP Outstanding Student Ambassador (one of ten university-wide, 2026); Outstanding Individual, SUSTech Winter Social Practice and Winter Visit to Alma Mater (one of 50 selected university-wide, 2026); Outstanding Camper, 4th Xiancheng Program (2025); Social Impact Award and Outstanding Volunteer Service Organization, Chengguang Volunteer Team (2025).",
 ]))
 
 story.append(section("Skills & Interests"))
