@@ -233,6 +233,7 @@
     .project-index { color: rgba(255,255,255,.42); }
     .project h3 { margin: -.18rem 0 .8rem; font-family: var(--serif); font-size: clamp(1.8rem, 3.1vw, 3.4rem); font-weight: 400; line-height: 1.02; letter-spacing: -.035em; }
     .project-role { color: var(--acid); font-size: .66rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .project-advisor { display: block; margin-top: .35rem; color: rgba(255,255,255,.5); font-family: var(--serif); font-size: .78rem; font-style: italic; }
     .project p { margin: 0; color: rgba(255,255,255,.64); font-size: .88rem; line-height: 1.78; }
     .tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.25rem; }
     .tags span { padding: .43rem .65rem; border-radius: 999px; background: rgba(255,255,255,.075); color: rgba(255,255,255,.72); font-size: .62rem; }
@@ -260,10 +261,10 @@
     .card-top { display: flex; justify-content: space-between; gap: 2rem; color: var(--muted); }
     .education-card h3 { margin: 5.5rem 0 1rem; font-family: var(--serif); font-size: clamp(2rem, 4.2vw, 4.2rem); font-weight: 400; line-height: .95; letter-spacing: -.045em; }
     .education-card .degree { color: var(--muted); font-size: .82rem; line-height: 1.7; }
-    .gpa-row { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 3rem; }
+    .gpa-row { margin-top: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; padding-top: 3rem; }
     .gpa-row div { padding-top: 1rem; border-top: 1px solid var(--hairline); }
-    .gpa-row strong { display: block; font-family: var(--serif); font-size: 2.8rem; font-weight: 400; letter-spacing: -.05em; }
-    .gpa-row span { color: var(--muted); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; }
+    .gpa-row strong { display: block; font-family: var(--serif); font-size: clamp(1.35rem, 2.3vw, 2.8rem); font-weight: 400; letter-spacing: -.05em; white-space: nowrap; }
+    .gpa-row span { color: var(--muted); font-size: .58rem; letter-spacing: .07em; text-transform: uppercase; }
     .detail-stack { display: grid; gap: 1.25rem; }
     .course-card h3, .skills-card h3 { margin: 0 0 2.2rem; font-family: var(--serif); font-size: 2rem; font-weight: 400; }
     details { border-top: 1px solid var(--hairline); }
@@ -518,8 +519,8 @@
             <p class="hero-intro">I study how mathematical models and data can make public systems respond faster, allocate smarter, and serve people better.</p>
             <div class="hero-meta">
               <div><span>Based</span><b>Shenzhen, China</b></div>
-              <div><span>Focus</span><b>OR · Optimization · ML</b></div>
-              <div><span>Now</span><b>B.Eng. Candidate, 2029</b></div>
+              <div><span>Focus</span><b>OR · Optimization · Emergency Response</b></div>
+              <div><span>Now</span><b>B.M. Candidate</b></div>
             </div>
           </div>
         </div>
@@ -541,9 +542,9 @@
           <span class="mono">Current signal</span>
           <p>Optimizing emergency medical coverage across Shenzhen through real dispatch data.</p>
         </div>
-        <div class="metric"><strong>620K+</strong><span>ambulance dispatch records studied</span></div>
+        <div class="metric"><strong>03</strong><span>applied optimization projects</span></div>
         <div class="metric"><strong>5,279</strong><span>urban grids modeled at 500 m resolution</span></div>
-        <div class="metric"><strong>90%</strong><span>coverage within a 10-minute threshold</span></div>
+        <div class="metric"><strong>90%</strong><span>ambulance travel-time prediction accuracy</span></div>
       </div>
     </section>
 
@@ -556,30 +557,30 @@
         <div class="project-list">
           <article class="project reveal">
             <span class="project-index mono">01</span>
-            <div><h3>EMS Station Location Optimization</h3><span class="project-role">Project Lead · 120急救站点选址优化</span></div>
+            <div><h3>EMS Station Location Optimization</h3><span class="project-role">Project Developer · 120急救站点选址优化</span><span class="project-advisor">Advised by Prof. Rowan Wang · Shenzhen, China</span></div>
             <div>
-              <p>Leading a six-person team to improve emergency medical station placement across Shenzhen. We combined road-network features with 360K real Tencent Maps ETA samples to train an XGBoost travel-time model, reaching MAE 1.64 min and R² 0.863. Finalist in the 8th China University Mechanical Engineering Innovation &amp; Creativity Competition.</p>
+              <p>Optimized EMS station locations across Shenzhen and partitioned the city into 5,279 500m × 500m grids. Built an XGBoost ETA model that predicts ambulance travel times with 90% accuracy, and analyzed station cancellation and scheduling.</p>
               <div class="tags"><span>Operations Research</span><span>XGBoost</span><span>OSMnx</span><span>Python</span></div>
             </div>
-            <time class="project-year mono">2026 — Now</time>
+            <time class="project-year mono">2026 — Present</time>
           </article>
           <article class="project reveal">
             <span class="project-index mono">02</span>
-            <div><h3>AED Deployment at Gulongzhong</h3><span class="project-role">Researcher · 古隆中景区AED布设优化</span></div>
+            <div><h3>AED Deployment at Gulongzhong based on Robust Optimization</h3><span class="project-role">Project Participant · 古隆中景区 AED 优化</span><span class="project-advisor">Advised by Prof. Rowan Wang · Shenzhen, China</span></div>
             <div>
-              <p>Comparing fixed AED placement with a dynamic human–vehicle–drone response scheme using road-network analysis. The project also explores sustainable operating models through potential insurance partnerships.</p>
+              <p>Compared fixed AED placement with a dynamic human–vehicle–drone response system using road-network analysis. Formulated a velocity distributionally robust optimization model to determine optimal locations; First Prize, China University Mechanical Engineering Innovation &amp; Creativity Competition (2026).</p>
               <div class="tags"><span>Optimization</span><span>Network Analysis</span><span>Public Health</span></div>
             </div>
-            <time class="project-year mono">2026 — Now</time>
+            <time class="project-year mono">2026 — Present</time>
           </article>
           <article class="project reveal">
             <span class="project-index mono">03</span>
-            <div><h3>Meal Optimization WeChat Mini Program</h3><span class="project-role">Project Developer · 餐食优化小程序</span></div>
+            <div><h3>Meal Optimization WeChat Mini Program</h3><span class="project-role">Project Developer · 餐食优化小程序</span><span class="project-advisor">Advised by Prof. Rowan Wang · Shenzhen, China</span></div>
             <div>
-              <p>Developed a personalized meal recommendation mini program with Taro, React, TypeScript, Tencent Cloud Functions, and an optimization solver. Supports dietary preference matching, nutrition constraints, dish-level replacement, hard ingredient exclusions, and fallback suggestions for infeasible plans.</p>
+              <p>Built a personalized meal recommendation mini program based on a mixed-integer programming model. Added nutrition limits, disliked-food exclusions, dish swaps, and fallback plans; improved reliability with carbohydrate alerts, solver compatibility, and clearer feedback.</p>
               <div class="tags"><span>Taro + React</span><span>TypeScript</span><span>Optimization Solver</span></div>
             </div>
-            <time class="project-year mono">2026</time>
+            <time class="project-year mono">2026 — Present</time>
           </article>
         </div>
       </div>
@@ -596,8 +597,6 @@
           <div class="interest-list">
             <div class="interest"><span class="mono">01</span><strong>Operations Research &amp; Optimization</strong><i>运筹学与最优化</i></div>
             <div class="interest"><span class="mono">02</span><strong>Emergency Response &amp; Logistics</strong><i>公共应急</i></div>
-            <div class="interest"><span class="mono">03</span><strong>Machine Learning &amp; Data Science</strong><i>数据驱动</i></div>
-            <div class="interest"><span class="mono">04</span><strong>Mathematical Modeling</strong><i>数学建模</i></div>
           </div>
         </div>
       </div>
@@ -612,12 +611,13 @@
         <div class="record-grid">
           <div class="bezel reveal">
             <article class="card education-card">
-              <div class="card-top"><span class="mono">Education</span><span class="mono">2025 — 2029</span></div>
+              <div class="card-top"><span class="mono">Education</span><span class="mono">2025 — Present</span></div>
               <h3>Southern University of Science and Technology</h3>
-              <p class="degree">B.Eng. in Industrial Engineering<br>Zhicheng College · 致诚书院</p>
+              <p class="degree">B.M. Candidate in Industrial Engineering<br>Zhicheng College · 致诚书院</p>
               <div class="gpa-row">
                 <div><strong>3.91</strong><span>GPA / 4.0</span></div>
-                <div><strong>1 / 11</strong><span>Current rank</span></div>
+                <div><strong>1 / 11</strong><span>Major rank</span></div>
+                <div><strong>3 / 244</strong><span>Assessment</span></div>
               </div>
             </article>
           </div>
@@ -631,7 +631,7 @@
                     <div><span>Ordinary Differential Equations B</span><b>98 · A+</b></div>
                     <div><span>Mathematical Analysis II</span><b>96 · A</b></div>
                     <div><span>Foundation of Probability Theory</span><b>94 · A</b></div>
-                    <div><span>College Physics II</span><b>90 · A−</b></div>
+                    <div><span>Intro to Machine Learning &amp; Big Data Analytics</span><b>P</b></div>
                   </div>
                 </details>
                 <details>
@@ -639,8 +639,6 @@
                   <div class="course-list">
                     <div><span>Introduction to C Programming</span><b>96 · A</b></div>
                     <div><span>Mathematical Analysis I</span><b>93 · A</b></div>
-                    <div><span>Linear Algebra</span><b>89 · B+</b></div>
-                    <div><span>College Physics I</span><b>87 · B+</b></div>
                   </div>
                 </details>
               </article>
@@ -649,9 +647,9 @@
               <article class="card skills-card">
                 <h3>Working toolkit</h3>
                 <div class="skill-lines">
-                  <div class="skill-line"><span>Programming</span><p>Python, MATLAB, R, LaTeX</p></div>
-                  <div class="skill-line"><span>Data &amp; ML</span><p>XGBoost, scikit-learn, NumPy, Pandas, OSMnx</p></div>
-                  <div class="skill-line"><span>Languages</span><p>Chinese · Native &nbsp; / &nbsp; English · Proficient</p></div>
+                  <div class="skill-line"><span>Programming &amp; Tools</span><p>Python, MATLAB, R, C, LaTeX, AnyLogic</p></div>
+                  <div class="skill-line"><span>Research Interests</span><p>Operations Research &amp; Optimization · Emergency Response &amp; Logistics</p></div>
+                  <div class="skill-line"><span>Languages</span><p>Mandarin · Native &nbsp; / &nbsp; English · Proficient &nbsp; / &nbsp; Korean · Basic</p></div>
                 </div>
               </article>
             </div>
@@ -667,18 +665,13 @@
           <h2>Honors &amp;<br><em>community.</em></h2>
         </div>
         <div class="award-list">
-          <article class="award reveal"><span class="award-no mono">01</span><div><h3>First-Class Outstanding Student Scholarship</h3><p>Southern University of Science and Technology · 南方科技大学优秀学生一等奖学金</p></div><time>2026</time></article>
-          <article class="award reveal"><span class="award-no mono">02</span><div><h3>First Prize, Greater Bay Area Industrial Engineering Innovation Competition</h3><p>Guangdong–Hong Kong–Macao Greater Bay Area · 粤港澳大湾区工业工程创新大赛一等奖</p></div><time>2026</time></article>
-          <article class="award reveal"><span class="award-no mono">03</span><div><h3>APRU ULP Outstanding Student Ambassador</h3><p>APRU / SUSTech · 优秀学生大使（全校十位）</p></div><time>2026</time></article>
-          <article class="award reveal"><span class="award-no mono">04</span><div><h3>Second Prize, National College Student Mathematics Competition</h3><p>Chinese Mathematical Society · 非数学A类二等奖</p></div><time>2025</time></article>
-          <article class="award reveal"><span class="award-no mono">05</span><div><h3>Outstanding Individual, Winter Social Practice</h3><p>SUSTech · 寒假社会实践优秀实践个人</p></div><time>2026</time></article>
-          <article class="award reveal"><span class="award-no mono">06</span><div><h3>Outstanding Individual, Winter Visit to Alma Mater Program</h3><p>SUSTech · 2026年寒假母校行先进个人</p></div><time>2026</time></article>
-          <article class="award reveal"><span class="award-no mono">07</span><div><h3>Outstanding Camper, “Xiancheng” Program</h3><p>Zhicheng College · 先诚团优秀营员</p></div><time>2025</time></article>
-          <article class="award reveal"><span class="award-no mono">08</span><div><h3>Social Impact Award, “Hundreds, Thousands, Myriads Project”</h3><p>Chengguang Volunteer Team · “百千万工程”突击队社会效益奖</p></div><time>2025</time></article>
-          <article class="award reveal"><span class="award-no mono">09</span><div><h3>Outstanding Communist Youth League Member</h3><p>SUSTech · 优秀共青团员</p></div><time>2025</time></article>
-          <article class="award reveal"><span class="award-no mono">10</span><div><h3>Outstanding Volunteer Service Organization</h3><p>Chengguang Volunteer Team · 年度优秀志愿服务组织</p></div><time>2025</time></article>
-          <article class="award reveal"><span class="award-no mono">11</span><div><h3>Second Prize, Outstanding Social Practice Team</h3><p>Chengguang Volunteer Team · 寒假社会实践优秀团队二等奖</p></div><time>2026</time></article>
-          <article class="award reveal"><span class="award-no mono">12</span><div><h3>APEC Shenzhen 2026 Volunteer</h3><p>International event service · APEC深圳2026志愿者 · 累计志愿服务160+小时</p></div><time>2026</time></article>
+          <article class="award reveal"><span class="award-no mono">01</span><div><h3>First-Class Outstanding Student Scholarship</h3><p>SUSTech · Top 5% university-wide · 南方科技大学优秀学生一等奖学金</p></div><time>2026</time></article>
+          <article class="award reveal"><span class="award-no mono">02</span><div><h3>First Prize, Industrial Engineering &amp; Lean Management Innovation Competition</h3><p>9th China University Mechanical Engineering Innovation &amp; Creativity Competition</p></div><time>2026</time></article>
+          <article class="award reveal"><span class="award-no mono">03</span><div><h3>First Prize, Greater Bay Area Industrial Engineering Innovation Competition</h3><p>Ranked 2nd of 54 teams · 粤港澳大湾区工业工程创新大赛一等奖</p></div><time>2026</time></article>
+          <article class="award reveal"><span class="award-no mono">04</span><div><h3>Second Prize, National College Student Mathematics Competition</h3><p>Non-Math Category A · Top 15% province-wide · 全国大学生数学竞赛非数学A类</p></div><time>2025</time></article>
+          <article class="award reveal"><span class="award-no mono">05</span><div><h3>APRU ULP Outstanding Student Ambassador</h3><p>One of ten selected university-wide · APRU ULP优秀学生大使</p></div><time>2026</time></article>
+          <article class="award reveal"><span class="award-no mono">06</span><div><h3>Outstanding Individual, SUSTech Winter Social Practice</h3><p>One of 50 selected university-wide · 寒假社会实践先进个人</p></div><time>2026</time></article>
+          <article class="award reveal"><span class="award-no mono">07</span><div><h3>Outstanding Individual, Winter Visit to Alma Mater Program</h3><p>SUSTech · 寒假母校行先进个人</p></div><time>2026</time></article>
         </div>
       </div>
     </section>
@@ -736,15 +729,16 @@
           <span class="window-kicker mono">Live academic snapshot · Current</span>
           <h2 id="cv-title">The latest,<br><em>at a glance.</em></h2>
           <div class="cv-list">
-            <div class="cv-row"><span>Education</span><strong>B.Eng. Industrial Engineering, SUSTech · GPA 3.91 / 4.0 · Rank 1 / 11</strong><time>2025 — 2029</time></div>
-            <div class="cv-row"><span>Research</span><strong>EMS Station Location Optimization · Project Lead</strong><time>2026 — Now</time></div>
-            <div class="cv-row"><span>Research</span><strong>AED Deployment at Gulongzhong · Researcher</strong><time>2026 — Now</time></div>
-            <div class="cv-row"><span>Service</span><strong>APEC Shenzhen 2026 Volunteer · 160+ cumulative hours</strong><time>2026</time></div>
-            <div class="cv-row"><span>Honor</span><strong>SUSTech Outstanding Student First-Class Scholarship</strong><time>2026</time></div>
-            <div class="cv-row"><span>Honor</span><strong>Greater Bay Area Industrial Engineering Innovation Competition · First Prize</strong><time>2026</time></div>
-            <div class="cv-row"><span>Honor</span><strong>National College Student Mathematics Competition · Second Prize</strong><time>2025</time></div>
-            <div class="cv-row"><span>Honor</span><strong>Winter Visit to Alma Mater Program · Outstanding Individual</strong><time>2026</time></div>
-            <div class="cv-row"><span>Honor</span><strong>APRU ULP Outstanding Student Ambassador</strong><time>2026</time></div>
+            <div class="cv-row"><span>Education</span><strong>B.M. Candidate in Industrial Engineering, SUSTech · GPA 3.91 / 4.0 · Major Rank 1 / 11 · Assessment Rank 3 / 244</strong><time>2025 — Present</time></div>
+            <div class="cv-row"><span>Project</span><strong>EMS Station Location Optimization · Advised by Prof. Rowan Wang</strong><time>2026 — Present</time></div>
+            <div class="cv-row"><span>Project</span><strong>AED Deployment at Gulongzhong based on Robust Optimization · Advised by Prof. Rowan Wang</strong><time>2026 — Present</time></div>
+            <div class="cv-row"><span>Project</span><strong>Meal Optimization WeChat Mini Program · Advised by Prof. Rowan Wang</strong><time>2026 — Present</time></div>
+            <div class="cv-row"><span>Leadership</span><strong>SUSTech Moviesalon · SUSTech IE Hunt · Industrial Engineering Class President · Orange Light Volunteer Service Team</strong><time>2025 — Present</time></div>
+            <div class="cv-row"><span>Service</span><strong>APEC Shenzhen 2026 · APRU ULP 2026 · Shenzhen Nan Shan Half Marathon 2025 · 160+ volunteer hours</strong><time>2025 — Present</time></div>
+            <div class="cv-row"><span>Honor</span><strong>First-Class Outstanding Student Scholarship · Top 5% university-wide</strong><time>2026</time></div>
+            <div class="cv-row"><span>Honor</span><strong>Greater Bay Area IE Innovation Competition · First Prize · 2nd of 54 teams</strong><time>2026</time></div>
+            <div class="cv-row"><span>Honor</span><strong>National College Student Mathematics Competition · Second Prize · Top 15%</strong><time>2025</time></div>
+            <div class="cv-row"><span>Honor</span><strong>APRU ULP Outstanding Student Ambassador · SUSTech Winter Social Practice Outstanding Individual (one of 50) · Winter Visit to Alma Mater Outstanding Individual</strong><time>2026</time></div>
           </div>
           <p class="cv-note">Download the current resume in English or Chinese. The previous May 2026 PDF remains available as an archive below.</p>
           <div class="cv-actions" style="margin-top:1rem;margin-bottom:0">
